@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order App Store Help</title>
+<meta name="description" content="Written-only help getting an AI-built app through Apple App Review: pre-submission audit, rejection fix, iOS launch, iOS plus Android.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="decoder.html">Rejection decoder</a>
+      <a href="checklist.html">Launch checklist</a>
+      <a href="order.html" aria-current="page">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Get your app through App Review</h1>
+  <p class="lede">For people who built an app with Lovable, Bolt, v0, Replit or similar and need it on the App Store. Everything happens in writing, by email. No calls or meetings.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> We prepare your app and your submission to reduce the known reasons for rejection, and we answer the reviewer with you if it comes back. We cannot promise approval, and nobody honestly can. Apple's review time is on top of our turnaround.</p>
+  </div>
+
+  <h2>Options</h2>
+  <div class="tiers">
+    <article class="card tier" data-tier="audit">
+      <h3>Pre-submission audit</h3>
+      <p class="price">$49</p>
+      <p class="muted">Before you submit.</p>
+      <ul>
+        <li>We review your app and listing against the common rejection reasons</li>
+        <li>Written report: what to fix, in priority order, with the guideline for each</li>
+        <li>You make the changes, or upgrade to a launch</li>
+      </ul>
+      <a class="btn secondary small" href="#order" data-pick="audit">Choose audit</a>
+    </article>
+    <article class="card tier" data-tier="fix">
+      <h3>Rejection fix</h3>
+      <p class="price">$99</p>
+      <p class="muted">Already rejected. Target: 72 hours from access.</p>
+      <ul>
+        <li>We read the full rejection and find the cause</li>
+        <li>Fix in your project, new build uploaded to TestFlight</li>
+        <li>Reply to the reviewer drafted per citation; sent only after you approve</li>
+        <li>Covers one rejection round and the guidelines cited in it</li>
+      </ul>
+      <a class="btn secondary small" href="#order" data-pick="fix">Choose rejection fix</a>
+    </article>
+    <article class="card tier" data-tier="ios">
+      <h3>iOS launch</h3>
+      <p class="price">$249</p>
+      <p class="muted">From web app to submitted iOS app.</p>
+      <ul>
+        <li>Native wrapper (Capacitor), app icon and splash screen</li>
+        <li>Privacy manifest, permission texts, App Privacy answers</li>
+        <li>Screenshots, name, subtitle, description, keywords</li>
+        <li>TestFlight build for you to try</li>
+        <li>Submission after your written OK, and reply drafts during review</li>
+      </ul>
+      <a class="btn secondary small" href="#order" data-pick="ios">Choose iOS launch</a>
+    </article>
+    <article class="card tier" data-tier="both">
+      <h3>iOS + Android</h3>
+      <p class="price">$299</p>
+      <p class="muted">iOS launch, plus Android up to closed testing.</p>
+      <ul>
+        <li>Everything in iOS launch</li>
+        <li>Android build, Play Console listing and closed testing track set up</li>
+        <li>Android stops at "closed testing ready". Production release is a later step you control.</li>
+      </ul>
+      <p class="muted" style="font-size:.88rem">Google requires newer personal developer accounts to run a closed test with at least 12 testers opted in for 14 days in a row before applying for production. You recruit the testers; we set up the track and the invite link.</p>
+      <a class="btn secondary small" href="#order" data-pick="both">Choose iOS + Android</a>
+    </article>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><strong>Send the form below.</strong> Include your app link and, for a fix, the full rejection text.</li>
+      <li><strong>We reply in writing</strong> confirming what we will do and the timeline, or telling you if we are not the right fit. We aim to reply within 24 hours.</li>
+      <li><strong>Pay</strong> with the secure link for your option (card payment through Stripe). Please pay only after our written confirmation.</li>
+      <li><strong>Give access</strong> to your App Store Connect (see below) and to your project code.</li>
+      <li><strong>We do the work</strong> and report by email. Nothing is submitted to Apple or Google without your written approval.</li>
+    </ol>
+    <p class="muted"><strong>Refunds.</strong> Cancel before work starts: full refund. If we miss the promised deadline (for example, 72 hours for a rejection fix): full refund. After we deliver, there is no refund, but if Apple rejects the app again we fix and resubmit up to two more times at no extra cost. We cannot promise Apple's approval — Apple decides.</p>
+  </div>
+
+  <h2>Accounts and access</h2>
+  <div class="card">
+    <p>The app is published from <strong>your own</strong> Apple Developer account, so you own it. Apple's membership fee is paid by you to Apple and is not part of our price. Google charges its own one-time registration fee for a Play Console account.</p>
+    <h3>Invite our team member as Admin in App Store Connect</h3>
+    <ol class="steps">
+      <li>Sign in to App Store Connect and open <strong>Users and Access</strong>.</li>
+      <li>Click <strong>+</strong> to add a user. First and last name: <strong>Kevin Choi</strong>. Email: <strong>sc@neumaxtech.com</strong>.</li>
+      <li>Role: <strong>Admin</strong>. Then click Invite.</li>
+    </ol>
+    <p><strong>Why Admin and not App Manager:</strong> signing a release build needs a distribution certificate, and App Manager cannot create one. Admin can.</p>
+    <p><strong>What we will not do in your account:</strong> accept or change agreements, tax or banking; make or change payments; change prices without your written request; delete apps, builds or data; or look at your users' personal data. Admin access technically allows some of these, which is why we state it here. You can remove us any time under Users and Access, and we recommend doing so once the work is finished.</p>
+    <h3>Android (iOS + Android option)</h3>
+    <p>In Play Console, open <strong>Users and permissions</strong>, invite <strong>sc@neumaxtech.com</strong> and give release and store listing permissions for this app only. Financial permissions are not needed.</p>
+    <h3>Your code</h3>
+    <p>Add us to your project's private GitHub repository, or send a code export from your builder. We give the finished iOS (and Android) project back to you.</p>
+  </div>
+
+  <h2 id="order">Order form</h2>
+  <form id="order-form" class="card" data-mailto="sc@neumaxtech.com" accept-charset="UTF-8" novalidate>
+    <fieldset class="field" style="border:0;padding:0;margin:0 0 16px">
+      <legend style="font-weight:600;margin-bottom:6px">Option</legend>
+      <label class="check"><input type="radio" name="tier" value="audit-49" data-tier="audit" required> <span>Pre-submission audit, $49</span></label>
+      <label class="check"><input type="radio" name="tier" value="fix-99" data-tier="fix"> <span>Rejection fix, $99</span></label>
+      <label class="check"><input type="radio" name="tier" value="ios-249" data-tier="ios"> <span>iOS launch, $249</span></label>
+      <label class="check"><input type="radio" name="tier" value="ios-android-299" data-tier="both"> <span>iOS + Android, $299</span></label>
+    </fieldset>
+
+    <div class="field">
+      <label for="f-name">Your name</label>
+      <input type="text" id="f-name" name="name" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="f-email">Email <span class="hint">All communication happens here.</span></label>
+      <input type="email" id="f-email" name="email" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="f-app">App name</label>
+      <input type="text" id="f-app" name="app_name" required>
+    </div>
+    <div class="field">
+      <label for="f-url">Link to the working web app <span class="hint">The published URL from your builder.</span></label>
+      <input type="url" id="f-url" name="app_url" placeholder="https://" required>
+    </div>
+    <div class="field">
+      <label for="f-builder">Built with</label>
+      <select id="f-builder" name="builder" required>
+        <option value="">Choose one</option>
+        <option>Lovable</option>
+        <option>Bolt</option>
+        <option>v0</option>
+        <option>Replit</option>
+        <option>Other or custom code</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-apple">Apple Developer account</label>
+      <select id="f-apple" name="apple_account" required>
+        <option value="">Choose one</option>
+        <option>Enrolled as an individual</option>
+        <option>Enrolled as an organization</option>
+        <option>Enrollment in progress</option>
+        <option>Not enrolled yet</option>
+      </select>
+    </div>
+    <div class="field" id="rejection-field" hidden>
+      <label for="f-rejection">Full rejection message <span class="hint">Paste everything from App Store Connect, including the "Guideline" lines and the review device.</span></label>
+      <textarea id="f-rejection" name="rejection_text"></textarea>
+    </div>
+    <div class="field" id="android-field" hidden>
+      <label for="f-play">Google Play Console account</label>
+      <select id="f-play" name="play_account">
+        <option value="">Choose one</option>
+        <option>Personal account</option>
+        <option>Organization account</option>
+        <option>Not created yet</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-notes">Anything else <span class="hint">Payments in the app, login methods, deadlines.</span></label>
+      <textarea id="f-notes" name="notes" style="min-height:100px;font-family:inherit"></textarea>
+    </div>
+
+    <div class="hp" aria-hidden="true">
+      <label for="f-company">Leave this empty</label>
+      <input type="text" id="f-company" name="company_website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label class="check"><input type="checkbox" name="ack_written" value="yes" required> <span>I understand all communication is in writing by email, with no calls or meetings.</span></label>
+    </div>
+    <div class="field">
+      <label class="check"><input type="checkbox" name="ack_apple_decides" value="yes" required> <span>I understand Apple (and Google) make the review decision and approval is not guaranteed.</span></label>
+    </div>
+    <div class="field">
+      <label class="check"><input type="checkbox" name="ack_rights" value="yes" required> <span>I own this app or have the right to publish it.</span></label>
+    </div>
+
+    <p class="status" id="form-status" role="status"></p>
+    <button class="btn" type="submit">Send request</button>
+    <p class="muted" style="margin-top:10px">No payment is taken by this form. We reply first.</p>
+  </form>
+
+  <h2 id="pay">Pay after confirmation</h2>
+  <div class="card">
+    <p>Use the link that matches the option we confirmed in writing.</p>
+    <div class="row">
+      <a class="btn secondary" href="https://buy.stripe.com/3cIeVe3wvdKsbuJ9d19k400" rel="noopener">Pay $49 audit</a>
+      <a class="btn secondary" href="https://buy.stripe.com/14A3cw7ML0XG56l0Gv9k402" rel="noopener">Pay $99 rejection fix</a>
+      <a class="btn secondary" href="https://buy.stripe.com/28EaEY8QP5dW7et0Gv9k401" rel="noopener">Pay $249 iOS launch</a>
+      <a class="btn secondary" href="https://buy.stripe.com/8x2eVe9UTeOw56l3SH9k403" rel="noopener">Pay $299 iOS + Android</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+<script src="order.js"></script>
+</body>
+</html>

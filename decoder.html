@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rejection Decoder</title>
+<meta name="description" content="Paste Apple's App Review rejection message and get a plain-English explanation, fix steps and a reply draft. Runs in your browser; nothing is uploaded.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="decoder.html" aria-current="page">Rejection decoder</a>
+      <a href="checklist.html">Launch checklist</a>
+      <a href="order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>App Review Rejection Decoder</h1>
+  <p class="lede">Paste the rejection message from App Store Connect. You get what each cited guideline usually means, fix steps that fit apps built with Lovable, Bolt, v0 or Replit, and a reply draft for the Resolution Center.</p>
+  <p class="muted">Free. It runs entirely in your browser, and the text you paste is not uploaded or stored.</p>
+
+  <form id="decode-form" class="card no-print">
+    <div class="field">
+      <label for="rejection">Rejection message
+        <span class="hint">App Store Connect &gt; Apps &gt; your app &gt; App Review &gt; the rejected submission. Copy everything, including the lines that start with "Guideline".</span>
+      </label>
+      <textarea id="rejection" name="rejection" spellcheck="false" placeholder="Guideline 4.2 - Design - Minimum Functionality&#10;&#10;Your app provides a limited user experience..."></textarea>
+    </div>
+    <div class="row">
+      <button class="btn" type="submit">Decode</button>
+      <button class="btn secondary" type="button" id="sample">Try a sample</button>
+    </div>
+  </form>
+
+  <section id="results" tabindex="-1" aria-live="polite"></section>
+
+  <h2>Before you change anything</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><strong>The guideline number is a category, not the reason.</strong> "2.1" covers everything from a crash to a missing demo account. Fix what the sentence under it says. We once fixed seven real defects after seeing only the numbers; Apple had asked about one of them.</li>
+      <li><strong>If you cannot reproduce it, ask.</strong> Reply and ask for the exact steps and screen. A single sentence back from the reviewer (for example "the app stays on the login page until we relaunch it") can point straight to the cause.</li>
+      <li><strong>Reply to each citation separately</strong>, and name the concrete change for each. "We fixed the issues" tends to come back as the same rejection.</li>
+      <li><strong>Only claim what you tested.</strong> If something could only be checked on a simulator, say what you checked.</li>
+      <li><strong>Test on the device Apple used.</strong> Reviews often run on an iPad even when the app was designed for iPhone.</li>
+      <li><strong>Some items need only a reply</strong> (a price confirmation, a demo account, metadata). Others need a new build with a higher build number.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Want someone to handle it?</h2>
+    <p>Rejection fix, $99: we read the full message, find the cause, make the fix in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <a class="btn" href="order.html?tier=fix">Order a rejection fix</a>
+  </div>
+
+  <details>
+    <summary>Guidelines this decoder covers</summary>
+    <ul class="plain" id="covered"></ul>
+    <p class="muted">Summaries are our own reading of the App Review Guidelines as of September 2026, not Apple's wording. Apple updates the guidelines; the current text at developer.apple.com is the authority.</p>
+  </details>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+<script src="decoder.js"></script>
+</body>
+</html>

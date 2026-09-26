@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Launch Checklist</title>
+<meta name="description" content="A stage-by-stage checklist for getting an app built with Lovable, Bolt, v0 or Replit through Apple's App Review.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="decoder.html">Rejection decoder</a>
+      <a href="checklist.html" aria-current="page">Launch checklist</a>
+      <a href="order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Ship-to-App-Store Checklist</h1>
+  <p class="lede">For apps built with Lovable, Bolt, v0 or Replit and wrapped for iOS (for example with Capacitor). Nine stages, in the order you will meet them. Each note says which App Review guideline the item protects against.</p>
+  <p class="muted">Completing this list lowers the odds of common rejections. It does not guarantee approval; Apple reviews every submission and makes the decision.</p>
+
+  <div class="card no-print">
+    <p id="overall-text" style="font-weight:600">0 of 0 done</p>
+    <div class="progress" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="overall-bar"></span></div>
+    <p class="muted" style="margin-top:10px">Checkmarks are saved in this browser only.</p>
+    <p class="note" id="store-note" hidden>This browser is not allowing saved progress (private mode or blocked storage). Checkmarks will reset when you leave the page.</p>
+    <div class="row">
+      <button class="btn secondary small" type="button" id="copy-open">Copy unchecked items</button>
+      <button class="btn secondary small" type="button" onclick="window.print()">Print</button>
+      <button class="btn secondary small" type="button" id="reset">Reset</button>
+    </div>
+    <label class="visually-hidden" for="open-items">Unchecked items</label>
+    <textarea id="open-items" readonly hidden style="margin-top:10px"></textarea>
+  </div>
+
+  <div id="stages"></div>
+
+  <noscript><p class="note">This checklist needs JavaScript to show the items.</p></noscript>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on some items?</h2>
+    <p>Pre-submission audit, $49: send us your project and we go through this list against your actual app and return a written report of what to fix. iOS launch, $249: we do the wrapping, assets, listing, TestFlight and submission with you in your own account.</p>
+    <div class="row">
+      <a class="btn" href="order.html?tier=audit">Order an audit</a>
+      <a class="btn secondary" href="order.html">See all options</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+<script src="checklist.js"></script>
+</body>
+</html>
