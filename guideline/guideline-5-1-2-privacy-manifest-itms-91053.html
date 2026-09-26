@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 5.1.2 and ITMS-91053 Privacy Manifest: What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Got ITMS-91053 Missing API declaration or a Guideline 5.1.2 tracking rejection? What the privacy manifest is, why Capacitor-wrapped AI apps hit it, and how to fix it.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-5-1-2-privacy-manifest-itms-91053.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 5.1.2 and ITMS-91053 Privacy Manifest: What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Got ITMS-91053 Missing API declaration or a Guideline 5.1.2 tracking rejection? What the privacy manifest is, why Capacitor-wrapped AI apps hit it, and how to fix it.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-5-1-2-privacy-manifest-itms-91053.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does ITMS-91053 Missing API declaration mean?", "acceptedAnswer": {"@type": "Answer", "text": "Your build, or a framework inside it, uses system APIs that need a declared reason, and no privacy manifest declares one. Add a PrivacyInfo.xcprivacy file with the matching reason codes and update plugins to versions that ship their own manifests."}}, {"@type": "Question", "name": "Does a Capacitor app need a privacy manifest?", "acceptedAnswer": {"@type": "Answer", "text": "In practice, yes. The native shell and common plugins use APIs in the required reason categories. Current versions include manifests for their own code, but your app target should still have one for the app."}}, {"@type": "Question", "name": "Do I need App Tracking Transparency if I only use analytics?", "acceptedAnswer": {"@type": "Answer", "text": "Only if data is used to track users across other companies' apps or websites, or shared with data brokers. Many first-party analytics setups do not track in that sense. Check what each SDK does and answer App Privacy to match."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 5.1.2 / ITMS-91053</p>
+  <h1>Guideline 5.1.2 and ITMS-91053: privacy manifest and tracking</h1>
+  <p class="lede">Two related privacy problems show up for wrapped apps. ITMS-91053 is an upload email saying the build uses certain system APIs without declaring why. Guideline 5.1.2 is a rejection about data used for tracking without asking. Both are fixed by knowing exactly what your build and its SDKs do.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p><strong>ITMS-91053, Missing API declaration.</strong> Paraphrased: the app or a framework inside it uses one or more "required reason" APIs, such as file timestamps, system boot time, disk space or user defaults, and there is no privacy manifest (<code>PrivacyInfo.xcprivacy</code>) that declares an approved reason. The email lists the API categories. Apple has required these declarations for new uploads since May 2024.</p>
+<p><strong>Guideline 5.1.2, Data Use and Sharing.</strong> Paraphrased: the app, or an SDK in it, collects data used to track people across other companies' apps or websites without asking through App Tracking Transparency. Or your App Privacy answers say you track, but the app never asks.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>A Capacitor app is a native shell plus plugins plus your web code. The shell and plugins use system APIs you never wrote yourself:</p>
+<ul class="plain">
+<li>The iOS project has no <code>PrivacyInfo.xcprivacy</code> file at all.</li>
+<li>An old Capacitor version or plugin predates privacy manifests, so its API use is undeclared.</li>
+<li>Storage plugins read user defaults and file timestamps, which fall in the required reason categories.</li>
+<li>An analytics or attribution SDK added from a tutorial tracks by default, or App Privacy was answered "used to track you" by mistake.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Read the upload email</strong> and list every API category it names.</li>
+<li><strong>Update Capacitor and every plugin</strong> to current versions. Recent versions usually include their own manifests, which removes many warnings.</li>
+<li><strong>Add a privacy manifest to the app target</strong> (in Xcode: New File &gt; App Privacy). For each remaining category, add an entry with the reason code that matches what the code actually does. Apple's documentation lists the allowed codes, for example <code>CA92.1</code> for user defaults read and written by the app itself.</li>
+<li><strong>Declare collected data and tracking</strong> in the same file, and set tracking to false if the app does not track.</li>
+<li><strong>List every SDK in the build</strong> and what it collects. Remove tracking SDKs you do not need, or show the App Tracking Transparency prompt before any tracking and respect the answer.</li>
+<li><strong>Make App Privacy answers in App Store Connect match</strong> the manifest and your privacy policy.</li>
+<li><strong>Upload a new build</strong> and confirm the ITMS email does not return.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. The ITMS-91053 email alone usually needs no reply; a new build is the answer. Reply only if it came with a rejection.</p>
+  <pre class="reply">Hello,
+
+Thank you. Build [version] includes a privacy manifest declaring [API categories] with reasons [codes]. [For 5.1.2, either: &quot;We removed (SDK); the app does not track users, and we corrected our App Privacy answers.&quot; Or: &quot;The app now asks for permission through App Tracking Transparency before (SDK) collects any data.&quot;]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a> because the same wrapped-app setup is behind most 4.2 findings.</li>
+<li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a> for the other privacy requirement wrapped apps commonly miss.</li>
+<li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a> because auth plugins also need current versions and manifests.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>What does ITMS-91053 Missing API declaration mean?</h3>
+<p>Your build, or a framework inside it, uses system APIs that need a declared reason, and no privacy manifest declares one. Add a PrivacyInfo.xcprivacy file with the matching reason codes and update plugins to versions that ship their own manifests.</p>
+<h3>Does a Capacitor app need a privacy manifest?</h3>
+<p>In practice, yes. The native shell and common plugins use APIs in the required reason categories. Current versions include manifests for their own code, but your app target should still have one for the app.</p>
+<h3>Do I need App Tracking Transparency if I only use analytics?</h3>
+<p>Only if data is used to track users across other companies&#x27; apps or websites, or shared with data brokers. Many first-party analytics setups do not track in that sense. Check what each SDK does and answer App Privacy to match.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 5.1.1(v) Rejection: What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 5.1.1(v) because users cannot delete their account in the app? What Apple expects, how to add deletion to a Lovable, Bolt, v0 or Replit app, and what to reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-5-1-1-v-account-deletion.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 5.1.1(v) Rejection: What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 5.1.1(v) because users cannot delete their account in the app? What Apple expects, how to add deletion to a Lovable, Bolt, v0 or Replit app, and what to reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-5-1-1-v-account-deletion.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a delete-account link to my website enough for Guideline 5.1.1(v)?", "acceptedAnswer": {"@type": "Answer", "text": "In our reading, a link that goes directly to the deletion page can be acceptable, but the option must start in the app and be clearly visible. A support email address alone is generally not enough."}}, {"@type": "Question", "name": "Does deactivating an account count as deletion?", "acceptedAnswer": {"@type": "Answer", "text": "No. Apple expects the account and its associated data to be deleted, or deletion to be started with a clear timeline. Temporary deactivation does not meet the requirement."}}, {"@type": "Question", "name": "Do I need to revoke Sign in with Apple tokens when deleting an account?", "acceptedAnswer": {"@type": "Answer", "text": "Apple asks apps that use Sign in with Apple to revoke the user's tokens when the account is deleted, using Apple's token revocation endpoint. Most auth providers document how to do this."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 5.1.1(v)</p>
+  <h1>Guideline 5.1.1(v) rejection: Account deletion</h1>
+  <p class="lede">Since 2022, Apple has required that apps which let people create an account also let them start deleting that account from inside the app. A 5.1.1(v) rejection means the reviewer could not find that option, even if it exists somewhere.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Paraphrased, the message says the app supports account creation but does not include an option to initiate account deletion. Apple sometimes asks for a screen recording of the deletion flow on a physical device.</p>
+<p>What Apple expects, in our reading of the guideline:</p>
+<ul class="plain">
+<li>The option is in the app and clearly visible, usually under settings or the account screen.</li>
+<li>It deletes the account and its associated data, not just deactivates or logs out.</li>
+<li>A link to a website is acceptable only if it goes straight to the deletion page; emailing support is generally not enough. Highly regulated services may use additional steps.</li>
+</ul>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>AI builders generate sign-up and log-out by default. Deletion is rarely in the template, and when it is added, it often ends up in the wrong place:</p>
+<ul class="plain">
+<li>Only "Log out" exists, or deletion is a support email.</li>
+<li>The delete option sits on a settings screen only visible to administrators. In one case we worked on, the feature existed but the demo account given to Apple was not an admin, so from the reviewer's seat it did not exist.</li>
+<li>Users who signed in with Apple or Google never see the settings page where deletion lives.</li>
+<li>The button deletes the auth user but leaves the profile and data rows in the database.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Add Settings &gt; Account &gt; Delete account,</strong> visible to every role and every sign-in method. It only deletes the user's own account, so there is rarely a reason to hide it.</li>
+<li><strong>Confirm once,</strong> then delete the account and its data, or clearly start deletion and say how long it takes.</li>
+<li><strong>Do it on the server.</strong> With Supabase or Firebase, deleting another auth user needs admin rights, so run it in a server function rather than exposing an admin key in the app.</li>
+<li><strong>If you use Sign in with Apple,</strong> revoke the user's Apple token as part of deletion.</li>
+<li><strong>Handle subscriptions honestly.</strong> Tell users that Apple subscriptions are cancelled in their Apple account settings.</li>
+<li><strong>Test it with the demo account</strong> you give Apple, and with a social sign-in account.</li>
+<li><strong>Tell the reviewer the path</strong> in App Review notes. If Apple asked for a recording on a device, send one from a device.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Give the exact path. If deletion existed before and was hidden by role, say what changed so the reviewer can find it.</p>
+  <pre class="reply">Hello,
+
+Thank you. Regarding Guideline 5.1.1(v): users can now delete their account in the app at [Settings &gt; Account &gt; Delete account]. This deletes [the account and associated data] [immediately / within N days]. It is available to all users, including those who signed in with [Apple / Google].
+
+[If requested: &quot;A screen recording of the flow on (device) is attached.&quot;]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a> if the app uses Sign in with Apple, whose token must be revoked on deletion.</li>
+<li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a> for the privacy manifest and data disclosures.</li>
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> if the demo account could not reach the feature.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Is a delete-account link to my website enough for Guideline 5.1.1(v)?</h3>
+<p>In our reading, a link that goes directly to the deletion page can be acceptable, but the option must start in the app and be clearly visible. A support email address alone is generally not enough.</p>
+<h3>Does deactivating an account count as deletion?</h3>
+<p>No. Apple expects the account and its associated data to be deleted, or deletion to be started with a clear timeline. Temporary deactivation does not meet the requirement.</p>
+<h3>Do I need to revoke Sign in with Apple tokens when deleting an account?</h3>
+<p>Apple asks apps that use Sign in with Apple to revoke the user&#x27;s tokens when the account is deleted, using Apple&#x27;s token revocation endpoint. Most auth providers document how to do this.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

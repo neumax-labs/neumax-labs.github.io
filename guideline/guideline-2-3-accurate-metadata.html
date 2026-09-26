@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 2.3 Rejection: What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 2.3 Accurate Metadata (2.3.3 screenshots, 2.3.7 name and keywords, 2.3.10 other platforms)? What it means for AI-built apps, how to fix the listing, and what to reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-2-3-accurate-metadata.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 2.3 Rejection: What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 2.3 Accurate Metadata (2.3.3 screenshots, 2.3.7 name and keywords, 2.3.10 other platforms)? What it means for AI-built apps, how to fix the listing, and what to reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-2-3-accurate-metadata.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a new build to fix a Guideline 2.3 rejection?", "acceptedAnswer": {"@type": "Answer", "text": "Often not. If the problem is only in the name, description, keywords or screenshots, edit them in App Store Connect and reply in the Resolution Center. If the problem text or placeholder is inside the app, you need a new build."}}, {"@type": "Question", "name": "Can App Store screenshots have captions and backgrounds?", "acceptedAnswer": {"@type": "Answer", "text": "Generally yes, as long as the real app in use is the main content. Screenshots that are mostly title art, a splash screen or a login screen are a common reason for a 2.3.3 rejection."}}, {"@type": "Question", "name": "Why was I rejected for mentioning Android?", "acceptedAnswer": {"@type": "Answer", "text": "Guideline 2.3.10 does not allow references to other mobile platforms in the app or its metadata. Search your app, description and screenshots for Android, Google Play and similar terms, including text copied from a web version."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 2.3</p>
+  <h1>Guideline 2.3 rejection: Accurate Metadata</h1>
+  <p class="lede">Guideline 2.3 is about your App Store listing, not your code. Something in the name, subtitle, description, screenshots, preview or keywords does not match what the app actually does. Many 2.3 findings are fixed in App Store Connect without a new build.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Apple usually cites a sub-guideline, and that number is the useful part. Paraphrased:</p>
+<ul class="plain">
+<li><strong>2.3 / 2.3.1:</strong> the description promises features the reviewer could not find, or the app contains features the listing does not mention.</li>
+<li><strong>2.3.3:</strong> screenshots do not show the app in use; they are mostly title art, a splash screen, a login screen or marketing mockups.</li>
+<li><strong>2.3.7:</strong> the name, subtitle or keywords are stuffed with search terms, use another company's brand, or claim something the app is not.</li>
+<li><strong>2.3.10:</strong> the app or listing mentions another platform, such as Android, Google Play, or "also on the web".</li>
+</ul>
+<p>The message often includes a screenshot of the part Apple objected to. Look at it before you edit anything.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>AI builders make it quick to produce a marketing site and an app at the same time, and the listing often gets copied from the site:</p>
+<ul class="plain">
+<li>The description lists roadmap features that the build does not have yet.</li>
+<li>Screenshots come from the landing page, with device frames around marketing art, or show only the sign-in screen.</li>
+<li>iPad screenshots are stretched iPhone captures, or there are none even though the app runs on iPad.</li>
+<li>A footer copied from the web app says "Get it on Google Play", or help text says "on Android, tap...".</li>
+<li>The name tries to rank for everything: "Planner - Budget, Money, Expense Tracker".</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Find the exact sub-guideline</strong> in the full message and fix only what it names. A broad rewrite can introduce a new problem.</li>
+<li><strong>Description:</strong> describe only what the submitted build does today. Move future features out.</li>
+<li><strong>Screenshots:</strong> capture the real app with realistic sample data. Upload at least the currently required iPhone size (6.9-inch at the time of writing) and the 13-inch iPad size if the app runs on iPad. Put the main feature in the first two. Captions are fine; the app must be the main content.</li>
+<li><strong>Name and keywords:</strong> keep the name short and distinct (30 characters maximum), move descriptive words to the subtitle, and remove competitor or famous brand names from name, subtitle and keywords.</li>
+<li><strong>Other platforms:</strong> search the app, description, What's New and screenshots for "Android", "Google", "Play Store" and "Chrome". Remove them, or hide them on iOS only.</li>
+<li><strong>Decide whether a build is needed.</strong> If the problem was only in the listing, edit it and reply. If the words or placeholders were inside the app, upload a new build.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Name the specific field you changed. If you also changed the build, give the new version and build number.</p>
+  <pre class="reply">Hello,
+
+Thank you. Regarding Guideline 2.3.[x]: we updated the [description / screenshots / name / keywords] so it matches the app. Specifically, [what changed, e.g. &quot;the screenshots now show the booking and history screens in use&quot; or &quot;we removed references to other platforms from the description&quot;].
+
+[If no new build: &quot;No binary change was needed; the listing has been updated.&quot;]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> if the reviewer could not find a feature because it was broken rather than missing.</li>
+<li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a> if the screenshots reveal the app is mostly a website.</li>
+<li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a> if the listing looks like a copy of another app.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Do I need a new build to fix a Guideline 2.3 rejection?</h3>
+<p>Often not. If the problem is only in the name, description, keywords or screenshots, edit them in App Store Connect and reply in the Resolution Center. If the problem text or placeholder is inside the app, you need a new build.</p>
+<h3>Can App Store screenshots have captions and backgrounds?</h3>
+<p>Generally yes, as long as the real app in use is the main content. Screenshots that are mostly title art, a splash screen or a login screen are a common reason for a 2.3.3 rejection.</p>
+<h3>Why was I rejected for mentioning Android?</h3>
+<p>Guideline 2.3.10 does not allow references to other mobile platforms in the app or its metadata. Search your app, description and screenshots for Android, Google Play and similar terms, including text copied from a web version.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

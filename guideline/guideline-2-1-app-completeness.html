@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 2.1 Rejection: What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 2.1 (App Completeness or Information Needed)? What Apple&#x27;s message usually means for Lovable, Bolt, v0 and Replit apps, how to fix it, and what to reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-2-1-app-completeness.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 2.1 Rejection: What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 2.1 (App Completeness or Information Needed)? What Apple&#x27;s message usually means for Lovable, Bolt, v0 and Replit apps, how to fix it, and what to reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-2-1-app-completeness.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does a Guideline 2.1 rejection always need a new build?", "acceptedAnswer": {"@type": "Answer", "text": "No. Information Needed findings, such as a missing demo account or a question about how a feature works, can often be answered in the Resolution Center after you update App Review Information. Crashes and broken flows need a new build with a higher build number."}}, {"@type": "Question", "name": "Why did Apple reject for 2.1 when the app works on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "The reviewer usually tests with a brand-new account, often on an iPad, without your saved session or data. Test on the device named in the message with a fresh account before changing anything."}}, {"@type": "Question", "name": "What should I do if I cannot reproduce the 2.1 problem?", "acceptedAnswer": {"@type": "Answer", "text": "Say so in your reply and ask the reviewer for the exact steps and screen. Guessing and resubmitting can cost a full review cycle; a short answer from Apple often points directly to the cause."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 2.1</p>
+  <h1>Guideline 2.1 rejection: App Completeness and Information Needed</h1>
+  <p class="lede">Guideline 2.1 is the widest category in App Review. It covers crashes, dead buttons, placeholder content, missing demo accounts and purchases the reviewer could not reach. The number tells you almost nothing; the sentence under it tells you what to fix.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Apple's message under 2.1 usually falls into one of three shapes. In our own words:</p>
+<ul class="plain">
+<li><strong>Something did not work.</strong> The reviewer saw a crash, an endless spinner, a blank screen, or a button that did nothing. The message often names the device, for example an iPad model and OS version.</li>
+<li><strong>Information Needed.</strong> The reviewer could not get far enough to judge the app, usually because it needs a login and no working demo account was provided. This is a question more than a verdict.</li>
+<li><strong>2.1(b): purchases not reachable.</strong> The in-app purchases could not be found or did not load, so the paywall showed an error or nothing.</li>
+</ul>
+<p>Read the full message in App Store Connect: open the app, open the rejected submission under App Review, and expand the messages and any screenshots. The email and the version page often show only the number.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>Apps made with Lovable, Bolt, v0 or Replit are usually tested by one person, on one phone, while already signed in. The reviewer is a stranger with a new account, often on an iPad. That gap produces most 2.1 findings:</p>
+<ul class="plain">
+<li>The wrapped build points at a development backend, or an environment key was left out of the release build.</li>
+<li>Sign-up works for you but not for a brand-new account (email verification, a missing profile row, a role that sees less).</li>
+<li>The layout breaks on iPad, so a button is off-screen or hidden behind another element.</li>
+<li>"Coming soon" buttons, "beta" labels, sample data or "your logo here" placeholders are still reachable.</li>
+<li>The "Sign-in required" box in App Review Information is off, or the notes describe a demo account that no longer exists.</li>
+</ul>
+<p>In one case we worked on, the reviewer reported "Sign in with Apple is not responsive". Sign-in had actually succeeded; the screen was never told to move on, so the app sat on the login page until it was relaunched. That was a 2.1 finding caused by a timing bug that only showed up for new accounts.</p>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Do not change code yet.</strong> Write one sentence per finding: what the reviewer did and what they saw.</li>
+<li><strong>Copy the device and OS</strong> from the message and test on that class of device, in both orientations if it is an iPad.</li>
+<li><strong>Walk the path as a stranger:</strong> a brand-new account, the free plan, no saved session.</li>
+<li><strong>If you cannot reproduce it, ask.</strong> Reply and request exact steps and the screen. A one-sentence answer from the reviewer can rule out most theories at once.</li>
+<li><strong>For Information Needed,</strong> create a dedicated reviewer account that needs no email or SMS code, turn on "Sign-in required", fill in the user name and password, and add three to five lines in Notes on where to tap. If Apple asked for a specific state (for example an expired subscription), create exactly that state.</li>
+<li><strong>For 2.1(b),</strong> compare product IDs character by character with App Store Connect, confirm the products are attached to this version, check the Paid Apps agreement is active, and complete one sandbox purchase on a device.</li>
+<li><strong>Remove placeholders</strong> the reviewer could reach, raise the build number, upload, and test the TestFlight build before resubmitting.</li>
+</ol>
+<p>Some 2.1 findings need only a reply (a demo account, an explanation). Defects need a new build.</p>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Answer each citation separately and claim only what you changed and tested. &quot;We fixed the issues&quot; tends to come back as the same rejection.</p>
+  <pre class="reply">Hello,
+
+Thank you for the details. Regarding Guideline 2.1: [one or two sentences on what was actually wrong, e.g. &quot;after signing in, the app did not move to the next screen until it was relaunched&quot;]. We fixed this in build [version (build)] by [the concrete change]. We tested it on [device + OS] with a new account.
+
+[If you could not reproduce it: &quot;We were not able to reproduce this on (devices tested). Could you share the steps and the screen where it happened? We want to fix the real cause rather than guess.&quot;]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a> if the broken flow was a social sign-in button.</li>
+<li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a> if the reviewer could not reach or complete a purchase.</li>
+<li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a> if a feature exists but a demo role cannot see it.</li>
+<li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a> if the listing describes features the build does not have.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Does a Guideline 2.1 rejection always need a new build?</h3>
+<p>No. Information Needed findings, such as a missing demo account or a question about how a feature works, can often be answered in the Resolution Center after you update App Review Information. Crashes and broken flows need a new build with a higher build number.</p>
+<h3>Why did Apple reject for 2.1 when the app works on my phone?</h3>
+<p>The reviewer usually tests with a brand-new account, often on an iPad, without your saved session or data. Test on the device named in the message with a fresh account before changing anything.</p>
+<h3>What should I do if I cannot reproduce the 2.1 problem?</h3>
+<p>Say so in your reply and ask the reviewer for the exact steps and screen. Guessing and resubmitting can cost a full review cycle; a short answer from Apple often points directly to the cause.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

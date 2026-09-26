@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 4.2 Rejection: What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 4.2 Minimum Functionality because your Lovable, Bolt, v0 or Replit app feels like a website? What Apple means, which native features help, and what to reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-4-2-minimum-functionality.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 4.2 Rejection: What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 4.2 Minimum Functionality because your Lovable, Bolt, v0 or Replit app feels like a website? What Apple means, which native features help, and what to reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-4-2-minimum-functionality.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can a Capacitor or web-wrapped app pass Guideline 4.2?", "acceptedAnswer": {"@type": "Answer", "text": "Many do. Apple judges what the app offers, not the technology. Apps that add native features suited to their purpose, native navigation and a proper offline state have a better chance. Apple makes the final decision."}}, {"@type": "Question", "name": "Which native features does Apple want to see for 4.2?", "acceptedAnswer": {"@type": "Answer", "text": "There is no fixed list. Pick features that fit what the app does, such as push notifications, camera input, share sheet, offline content or biometric unlock, and describe each one in your reply."}}, {"@type": "Question", "name": "Should I appeal a 4.2 rejection?", "acceptedAnswer": {"@type": "Answer", "text": "Usually improve the app first and reply with the specific changes. An appeal to the App Review Board makes sense when you believe the reviewer misread what the app does, not when the app is still mostly a website."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 4.2</p>
+  <h1>Guideline 4.2 rejection: Minimum Functionality</h1>
+  <p class="lede">Guideline 4.2 is the rejection most often associated with wrapped web apps. Apple&#x27;s view, paraphrased: the app is a website in a container and offers little that a browser does not. The fix is to make it useful as an iPhone app, then say exactly what changed.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>The typical 4.2 message says the app provides a limited user experience because it is not sufficiently different from a mobile browsing experience. Related sub-guidelines narrow it down:</p>
+<ul class="plain">
+<li><strong>4.2.2:</strong> the app is mainly marketing material, a list of links, or content collected from elsewhere.</li>
+<li><strong>4.2.3:</strong> the app does not work on its own; a new user must sign up on the website first, or sees nothing without content created elsewhere.</li>
+<li><strong>4.2.6:</strong> the app looks like it came from a template or app-generation service and is published by someone other than the business it represents.</li>
+</ul>
+<p>Being built with an AI tool is not the problem in itself. Feeling like a website, being generic, or being published on someone else's behalf is.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>A Lovable, Bolt, v0 or Replit app is a web app. Wrapping it with Capacitor gets it onto an iPhone, but by default it still behaves like a browser tab:</p>
+<ul class="plain">
+<li>The site's own header, hamburger menu and footer, with links that open other web pages inside the app.</li>
+<li>A blank white screen when there is no connection.</li>
+<li>Nothing uses the phone: no notifications, camera, share sheet, haptics or data kept on the device.</li>
+<li>Cookie banners, "download our app" banners and web-only login flows left in.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Pick native features that fit the app's job.</strong> Two or three real ones beat a long list. Common options: push notifications for events the user cares about, camera or photo input, the share sheet for exporting, an offline screen with cached content, biometric unlock, home screen quick actions.</li>
+<li><strong>Use native navigation.</strong> A tab bar for the main areas, and no web header or footer.</li>
+<li><strong>Handle offline.</strong> Show a proper offline state with whatever can be shown from cache, not a blank page.</li>
+<li><strong>Clean out web-only parts:</strong> cookie banners, app download banners, links to the marketing site, and external links that open inside the app.</li>
+<li><strong>Make it work on its own</strong> (4.2.3): let users sign up in the app, and give the reviewer a demo account with realistic data.</li>
+<li><strong>For 4.2.6,</strong> submit from the developer account of the business the app is for, and remove template leftovers such as default names and sample images.</li>
+<li><strong>Test on iPhone and iPad,</strong> upload a new build, and update screenshots so they show the native features.</li>
+</ol>
+<p>If the honest answer is that the app is a brochure, a website may be the better home for it. That is a legitimate outcome.</p>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. List features specifically, with where to find them. A vague &quot;we improved the app&quot; usually gets the same result.</p>
+  <pre class="reply">Hello,
+
+Thank you for the feedback. Build [version] adds features specific to iOS:
+
+- [Feature 1, e.g. &quot;Push notifications when a booking is confirmed&quot;]
+- [Feature 2, e.g. &quot;Offline access to saved items&quot;]
+- [Feature 3, e.g. &quot;Export reports through the share sheet&quot;]
+
+Navigation now uses a native tab bar, and [other change]. To see these, [short path, e.g. &quot;sign in with the demo account and open Saved&quot;].
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a> if Apple also thinks the app is a copy of others.</li>
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> if the offline blank screen was reported as a bug.</li>
+<li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a> if the wrapped site still shows web pricing.</li>
+<li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a> for the privacy manifest that wrapped apps need.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Can a Capacitor or web-wrapped app pass Guideline 4.2?</h3>
+<p>Many do. Apple judges what the app offers, not the technology. Apps that add native features suited to their purpose, native navigation and a proper offline state have a better chance. Apple makes the final decision.</p>
+<h3>Which native features does Apple want to see for 4.2?</h3>
+<p>There is no fixed list. Pick features that fit what the app does, such as push notifications, camera input, share sheet, offline content or biometric unlock, and describe each one in your reply.</p>
+<h3>Should I appeal a 4.2 rejection?</h3>
+<p>Usually improve the app first and reply with the specific changes. An appeal to the App Review Board makes sense when you believe the reviewer misread what the app does, not when the app is still mostly a website.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

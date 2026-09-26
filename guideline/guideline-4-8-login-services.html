@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 4.8 Rejection: What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 4.8 Login Services because your app has Google sign-in but no Sign in with Apple? What it means, how to add it in a wrapped app, and what to reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-4-8-login-services.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 4.8 Rejection: What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 4.8 Login Services because your app has Google sign-in but no Sign in with Apple? What it means, how to add it in a wrapped app, and what to reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-4-8-login-services.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I have to add Sign in with Apple if I have Google login?", "acceptedAnswer": {"@type": "Answer", "text": "If Google or another third-party login is used for the main account, Apple asks for an equivalent option that meets its privacy conditions, and Sign in with Apple meets them. Some apps qualify for exceptions; check the current guideline text."}}, {"@type": "Question", "name": "Why does Apple say Sign in with Apple is not responsive?", "acceptedAnswer": {"@type": "Answer", "text": "Often sign-in worked but the app did not move to the next screen, for example because it waited for a profile that loaded later. Ask the reviewer what they saw, and test with a brand-new Apple ID."}}, {"@type": "Question", "name": "Can I design my own Sign in with Apple button?", "acceptedAnswer": {"@type": "Answer", "text": "Apple publishes rules for the button's look. Using the official button style is the safer path; a custom button that is hard to identify can be rejected under the design guidelines."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 4.8</p>
+  <h1>Guideline 4.8 rejection: Login Services and Sign in with Apple</h1>
+  <p class="lede">If your app offers &quot;Continue with Google&quot; or another third-party sign-in for the main account, Apple asks you to also offer a login option that meets its privacy conditions. In practice most apps add Sign in with Apple. The second half of the problem is making it actually work.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Paraphrased, a 4.8 message says the app uses a third-party login service but does not offer an equivalent option that limits data collection to name and email, lets users keep their email private, and does not track them for advertising without consent. Sign in with Apple meets those conditions.</p>
+<p>There are exceptions, for example apps that use only your own company's account system, education or enterprise apps using existing accounts, and clients for a specific third-party service. Check the current guideline text before relying on one.</p>
+<p>A related finding appears under 2.1: "Sign in with Apple is not responsive". The option is there, but the reviewer tapped it and nothing seemed to happen.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>The auth templates in AI builders often include a Google button by default, and nobody adds the Apple option until review. Then:</p>
+<ul class="plain">
+<li>The Apple button is custom-drawn and hard to see. We measured one at 1.04:1 contrast against a dark background, which is effectively invisible. The official button was already in the project and used zero times.</li>
+<li>Sign-in succeeds, but the app decides "signed in" from a profile record that loads a moment later, so the screen stays on login until the app is relaunched.</li>
+<li>First-time setup logic was written when Google was the only social login, so new Apple users skip it and land in an empty app.</li>
+<li>The capability is missing from the App ID or the provider (Supabase, Firebase) is not configured for native Apple sign-in in the wrapped app.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Add Sign in with Apple</strong> as a native flow in the wrapped app. Enable the capability on the App ID and in the Xcode project, and configure your auth provider for it.</li>
+<li><strong>Use Apple's official button</strong> (black on light backgrounds, white on dark), at the same size and position as the other sign-in buttons.</li>
+<li><strong>Check what happens after success.</strong> Wait for the user's profile to load before moving on, and make the screen react when the signed-in user changes. If the profile cannot load, sign out and show an error rather than leaving a half-signed-in state.</li>
+<li><strong>Find every place that checks how a user signed in.</strong> Anything written for Google only must learn about Apple too.</li>
+<li><strong>Handle "Hide My Email"</strong> relay addresses, and do not ask again for a name or email Apple already provided.</li>
+<li><strong>Test with an Apple ID that has never used the app,</strong> on a real device and an iPad if possible. A saved session on your own phone will not reproduce a first sign-in.</li>
+<li><strong>Upload a new build</strong> and describe exactly what you tested.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. If you could only test some of this on a simulator, say what you checked and where.</p>
+  <pre class="reply">Hello,
+
+Thank you. Regarding Guideline 4.8: build [version] offers Sign in with Apple alongside [other options], using Apple&#x27;s standard button. We tested it with a new Apple ID [including Hide My Email] on [devices]. After signing in, the app goes directly to [screen] without relaunching.
+
+[If the button was hard to see: &quot;The button now uses Apple&#x27;s official white style on the dark login screen.&quot;]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a> because Sign in with Apple users also need in-app account deletion, with token revocation.</li>
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> for the "not responsive" finding after sign-in.</li>
+<li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a> for privacy manifest warnings from auth plugins.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Do I have to add Sign in with Apple if I have Google login?</h3>
+<p>If Google or another third-party login is used for the main account, Apple asks for an equivalent option that meets its privacy conditions, and Sign in with Apple meets them. Some apps qualify for exceptions; check the current guideline text.</p>
+<h3>Why does Apple say Sign in with Apple is not responsive?</h3>
+<p>Often sign-in worked but the app did not move to the next screen, for example because it waited for a profile that loaded later. Ask the reviewer what they saw, and test with a brand-new Apple ID.</p>
+<h3>Can I design my own Sign in with Apple button?</h3>
+<p>Apple publishes rules for the button&#x27;s look. Using the official button style is the safer path; a custom button that is hard to identify can be rejected under the design guidelines.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>
