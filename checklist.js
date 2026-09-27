@@ -14,6 +14,7 @@
       ['nat-shell', 'The app uses native navigation (tab bar or similar), not your website header, footer and hamburger menu.', 'The most common rejection for wrapped web apps is "not sufficiently different from a mobile browsing experience".'],
       ['nat-feature', 'At least two features use the phone: push notifications, camera, share sheet, offline data, biometrics, haptics, widgets.', 'Pick features that fit the app. List them in your review notes.'],
       ['nat-offline', 'With no connection the app shows a clear offline screen, not a blank page or browser error.', 'Reviewers sometimes test on poor networks.'],
+      ['nat-first-offline', 'Fresh install, first launch in airplane mode: the app shows a message and a retry, not a white screen.', 'A failed first fetch that leaves a blank screen looks like a crash to a reviewer. Two-minute test.'],
       ['nat-links', 'External links open in the in-app browser or Safari, and nothing says "download our app" or "open in browser".', ''],
       ['nat-web-only', 'Cookie banners, website footers and "made with" badges are hidden inside the app.', '']
     ]},
