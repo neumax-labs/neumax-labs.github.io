@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 3.1.2 Rejection: Subscription Paywall, Restore Button, Terms and Privacy Links (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 3.1.2 for a subscription paywall? Missing Terms of Use or Privacy Policy links, no Restore Purchases, unclear trial pricing: what to fix and what to reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-3-1-2-subscriptions.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 3.1.2 Rejection: Subscription Paywall, Restore Button, Terms and Privacy Links (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 3.1.2 for a subscription paywall? Missing Terms of Use or Privacy Policy links, no Restore Purchases, unclear trial pricing: what to fix and what to reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-3-1-2-subscriptions.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where do the Terms of Use and Privacy Policy links need to be?", "acceptedAnswer": {"@type": "Answer", "text": "In the app's purchase flow, usually on the paywall, and in the App Store metadata: the Privacy Policy URL field, plus a Terms of Use link in the description or a custom License Agreement. Both links must open working pages."}}, {"@type": "Question", "name": "Do I need a Restore Purchases button if users log in?", "acceptedAnswer": {"@type": "Answer", "text": "Apple expects a restore mechanism for restorable purchases, and a visible Restore Purchases button is the common way reviewers look for it. Login-based access alone is often not enough, especially for a user who never created an account."}}, {"@type": "Question", "name": "Can I show the weekly price bigger than the yearly price?", "acceptedAnswer": {"@type": "Answer", "text": "Apple wants the amount that will be billed to be the most prominent price. A per-week breakdown can appear, but smaller than the price actually charged. Trial wording should say what is charged after the trial ends."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 3.1.2</p>
+  <h1>Guideline 3.1.2 rejection: subscriptions and the paywall</h1>
+  <p class="lede">Guideline 3.1.2 covers auto-renewable subscriptions. Most rejections are about the paywall screen, not the product: the reviewer could not see what the user pays and when, could not find Terms of Use and Privacy Policy links, or could not restore a purchase.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Apple usually names the missing items. Paraphrased, the common ones are:</p>
+<ul class="plain">
+<li><strong>Missing links:</strong> the purchase flow, or the App Store metadata, does not include a working link to Terms of Use (EULA) and to the Privacy Policy.</li>
+<li><strong>Unclear terms:</strong> the billed amount is not the most prominent price, or a free trial hides what happens when it ends. Users must see the title, length and price of each subscription before paying.</li>
+<li><strong>No restore:</strong> there is no way to restore a previous purchase on a new device. Apple often cites this under 3.1.1 as well.</li>
+<li><strong>Not enough ongoing value (3.1.2(a)):</strong> a subscription for something that does not change or keep delivering over time.</li>
+</ul>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>Paywalls in AI-built apps usually start as a web pricing page. When In-App Purchase is added later, often with RevenueCat, the screen keeps its web layout:</p>
+<ul class="plain">
+<li>The Terms and Privacy links live in the web footer, which the wrapped app hides.</li>
+<li>"Start free trial" is the big text and the yearly price is small grey text below it, or the price shown is a per-week figure that is not what gets billed.</li>
+<li>There is no Restore Purchases button because the web version restored access through login.</li>
+<li>The Terms link points to a page on the builder's preview domain that returns an error on the reviewer's network.</li>
+<li>The App Store description does not mention Terms of Use, and the custom EULA field is empty.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Show each plan clearly</strong> on the paywall: name, length (monthly, yearly), and the full billed price as the largest price on screen. A per-week or per-month breakdown can appear, but smaller.</li>
+<li><strong>Explain the trial in plain words</strong> near the button: "Free for 7 days, then $29.99 per year. Cancel any time in Settings." Use the real numbers for each storefront, which StoreKit or RevenueCat provide.</li>
+<li><strong>Add two working links on the paywall:</strong> Terms of Use and Privacy Policy. They should open real pages on your own domain, not a preview URL. Apple's standard EULA is acceptable if you do not have your own.</li>
+<li><strong>Add a Restore Purchases button</strong> on the paywall and in Settings. It should call the restore function in StoreKit or your billing SDK and show a result message.</li>
+<li><strong>Update App Store Connect:</strong> put the Privacy Policy URL in App Privacy, and either add a Terms of Use link to the description or fill the custom License Agreement field.</li>
+<li><strong>Check the subscription products</strong> are attached to the app version and have a display name and description.</li>
+<li><strong>Test a sandbox purchase, a restore and a cancel</strong> on a real device, then upload a new build.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Say where on screen each item is, so the reviewer can find it quickly.</p>
+  <pre class="reply">Hello,
+
+Thank you. In build [version], the subscription screen ([where it appears, e.g. &quot;after onboarding and under Settings &gt; Plan&quot;]) now shows the plan name, length and full billed price, working links to our Terms of Use and Privacy Policy, and a Restore Purchases button. We also added the Terms of Use link to the App Store description.
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a> if the app still sells digital access through Stripe or a web checkout.</li>
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> if the reviewer could not load the subscription products at all.</li>
+<li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a> if the description advertises features that are behind the paywall without saying so.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Where do the Terms of Use and Privacy Policy links need to be?</h3>
+<p>In the app&#x27;s purchase flow, usually on the paywall, and in the App Store metadata: the Privacy Policy URL field, plus a Terms of Use link in the description or a custom License Agreement. Both links must open working pages.</p>
+<h3>Do I need a Restore Purchases button if users log in?</h3>
+<p>Apple expects a restore mechanism for restorable purchases, and a visible Restore Purchases button is the common way reviewers look for it. Login-based access alone is often not enough, especially for a user who never created an account.</p>
+<h3>Can I show the weekly price bigger than the yearly price?</h3>
+<p>Apple wants the amount that will be billed to be the most prominent price. A per-week breakdown can appear, but smaller than the price actually charged. Trial wording should say what is charged after the trial ends.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-1-5-developer-information.html">Guideline 1.5: Developer information and support URL</a></li>
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a></li>
+      <li><a href="guideline-2-5-2-software-requirements.html">Guideline 2.5.2: Software requirements / downloaded code</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-3-1-2-subscriptions.html">Guideline 3.1.2: Subscriptions, restore and terms links</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://neumax-labs.github.io/decoder.html</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/decoder.html</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://neumax-labs.github.io/checklist.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/order.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-2-1-app-completeness.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-2-3-accurate-metadata.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-3-1-1-in-app-purchase.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-4-2-minimum-functionality.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-4-3-spam.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-4-8-login-services.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-5-1-1-v-account-deletion.html</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://neumax-labs.github.io/guideline/guideline-5-1-2-privacy-manifest-itms-91053.html</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/order.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/sample-audit.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-1-5-developer-information.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-2-1-app-completeness.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-2-3-accurate-metadata.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-2-3-3-2-3-7-screenshots-metadata.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-2-5-2-software-requirements.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-3-1-1-in-app-purchase.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-3-1-2-subscriptions.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-4-2-minimum-functionality.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-4-3-spam.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-4-8-login-services.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-5-1-1-data-collection-purpose-strings.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-5-1-1-v-account-deletion.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-5-1-2-privacy-manifest-itms-91053.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://neumax-labs.github.io/guideline/guideline-5-6-4-0-design-copycats.html</loc><lastmod>2026-09-28</lastmod></url>
 </urlset>

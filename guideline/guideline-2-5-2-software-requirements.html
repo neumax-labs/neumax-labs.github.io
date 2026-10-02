@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 2.5.2 Rejection: Downloaded Code and Remote Web Apps, What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 2.5.2 Software Requirements for downloading or executing code? Why Capacitor apps that load a live URL or push live updates hit it, and how to fix it.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-2-5-2-software-requirements.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 2.5.2 Rejection: Downloaded Code and Remote Web Apps, What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 2.5.2 Software Requirements for downloading or executing code? Why Capacitor apps that load a live URL or push live updates hit it, and how to fix it.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-2-5-2-software-requirements.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is loading my website in a Capacitor app a 2.5.2 problem?", "acceptedAnswer": {"@type": "Answer", "text": "It can be. If the app's features all come from a remote URL, what Apple reviewed can change at any time, which is what 2.5.2 is about. Bundling the web build inside the app and calling your server only for data is the usual fix."}}, {"@type": "Question", "name": "Are live updates (over-the-air JavaScript updates) allowed?", "acceptedAnswer": {"@type": "Answer", "text": "Apple's developer agreement permits some downloaded interpreted code if it does not change the app's primary purpose or add features beyond what was reviewed. Using live updates for bug fixes and content is the common reading; shipping new features that way is a risk."}}, {"@type": "Question", "name": "Can my app let users generate and run code?", "acceptedAnswer": {"@type": "Answer", "text": "Some cases are allowed with limits, such as education apps where the code is visible and editable. A general feature that builds and runs new apps inside yours is a harder case. Read the current 2.5.2 and 4.7 text; Apple decides."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 2.5.2</p>
+  <h1>Guideline 2.5.2 rejection: apps must be self-contained</h1>
+  <p class="lede">Guideline 2.5.2 says an app has to be a self-contained bundle. It may not download or run code that adds or changes its features after review. For a wrapped web app, the question Apple is really asking is: is the thing we reviewed the thing users will get?</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Paraphrased: the app downloads, installs or executes code that introduces or changes its features or functionality, so what Apple reviewed can change without a new review. Apple sometimes adds that the app appears to load its main content from a remote server, or that it lets users create and run other apps or code.</p>
+<p>The guideline sits next to the developer agreement, which permits some downloaded interpreted code (such as JavaScript) as long as it does not change the app's primary purpose, create a store for other code, or get around signing and the sandbox. That exception is narrower than many live-update tutorials suggest.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>Most AI builders produce a website first. The shortest path to an iPhone app is to point a native shell at that website, which is exactly the pattern 2.5.2 is written against:</p>
+<ul class="plain">
+<li><code>capacitor.config.ts</code> has <code>server.url</code> set to the live site (for example the builder's published URL), so the app bundle contains almost nothing and every feature comes from the server.</li>
+<li>A live-update service is set up to replace the whole web bundle, including new screens and features, without a new build.</li>
+<li>The app itself is an AI tool that generates small apps or scripts and runs them on the device.</li>
+<li>Feature flags turn on large unreviewed sections after approval, such as a hidden marketplace or payment area.</li>
+</ul>
+<p>The same setup often draws a 4.2 finding as well, because a remote site in a shell also tends to feel like a browser tab.</p>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Check where the app's code comes from.</strong> Open <code>capacitor.config.ts</code> (or <code>.json</code>). If <code>server.url</code> is set, the app is loading a remote site.</li>
+<li><strong>Bundle the web build.</strong> Run your builder's production build, copy it into the native project with <code>npx cap sync</code>, and remove <code>server.url</code> so the app loads from its own files. The app still calls your backend for data; that is normal.</li>
+<li><strong>Handle no connection.</strong> With local files, you can show a real offline state instead of a failed page load.</li>
+<li><strong>Limit live updates to fixes.</strong> If you keep a live-update service, use it for bug fixes and content, not new features or a different purpose. Ship new features as a new build that goes through review.</li>
+<li><strong>Remove hidden sections.</strong> Anything that can be switched on after approval should either be visible to the reviewer now or removed from this build.</li>
+<li><strong>If your app runs user-made code,</strong> read the current 2.5.2 and 4.7 text closely. Apple allows some education and preview cases with limits; a general "make and run any app" feature is a harder case, and Apple decides.</li>
+<li><strong>Upload a new build</strong> and explain the change in App Review Information notes.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Say plainly where the app's code now comes from.</p>
+  <pre class="reply">Hello,
+
+Thank you. In build [version], the app's interface and features are bundled in the app binary and no longer load from a remote website. The app contacts our server only for [account data / the user's content]. [If you kept a live-update service: &quot;Over-the-air updates are limited to bug fixes and content, and new features will be submitted for review.&quot;]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a> because a remote site in a native shell usually draws both findings.</li>
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> if features were hidden from the reviewer behind flags or a login.</li>
+<li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a> because bundling locally is a good moment to update Capacitor and add the manifest.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Is loading my website in a Capacitor app a 2.5.2 problem?</h3>
+<p>It can be. If the app&#x27;s features all come from a remote URL, what Apple reviewed can change at any time, which is what 2.5.2 is about. Bundling the web build inside the app and calling your server only for data is the usual fix.</p>
+<h3>Are live updates (over-the-air JavaScript updates) allowed?</h3>
+<p>Apple&#x27;s developer agreement permits some downloaded interpreted code if it does not change the app&#x27;s primary purpose or add features beyond what was reviewed. Using live updates for bug fixes and content is the common reading; shipping new features that way is a risk.</p>
+<h3>Can my app let users generate and run code?</h3>
+<p>Some cases are allowed with limits, such as education apps where the code is visible and editable. A general feature that builds and runs new apps inside yours is a harder case. Read the current 2.5.2 and 4.7 text; Apple decides.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-1-5-developer-information.html">Guideline 1.5: Developer information and support URL</a></li>
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a></li>
+      <li><a href="guideline-2-5-2-software-requirements.html">Guideline 2.5.2: Software requirements / downloaded code</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-3-1-2-subscriptions.html">Guideline 3.1.2: Subscriptions, restore and terms links</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample $49 Pre-Submission App Store Audit Report (Fictional App) | Ship Desk</title>
+<meta name="description" content="A full sample of the $49 pre-submission audit for an AI-built app: verdict, eight findings with guideline, evidence, fix steps and severity, a before-you-submit list, and what the audit does not cover. The app is fictional.">
+<link rel="canonical" href="https://neumax-labs.github.io/sample-audit.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sample $49 Pre-Submission App Store Audit Report (Fictional App)">
+<meta property="og:description" content="A full sample of the $49 pre-submission audit for an AI-built app: verdict, eight findings with guideline, evidence, fix steps and severity, a before-you-submit list, and what the audit does not cover. The app is fictional.">
+<meta property="og:url" content="https://neumax-labs.github.io/sample-audit.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<style>
+  .sev { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+  .sev.blocker { color: var(--danger); border-color: var(--danger); background: transparent; }
+  .sev.high { color: var(--warn); background: var(--warn-soft); border-color: transparent; }
+  .sev.medium { color: var(--accent); background: var(--accent-soft); border-color: transparent; }
+  .sample-banner { border: 2px dashed var(--warn); background: var(--warn-soft); color: var(--text); border-radius: var(--radius); padding: 12px 16px; margin: 0 0 18px; }
+  .sample-banner p { margin: 0; }
+  .meta-list { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
+  .meta-list dt { font-weight: 600; color: var(--muted); }
+  .meta-list dd { margin: 0; }
+  .table-wrap { overflow-x: auto; }
+  table.findings { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  table.findings th, table.findings td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.findings th { color: var(--muted); font-weight: 600; }
+  .finding h3 { margin-top: 0; }
+  .finding .head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .finding pre { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font-family: var(--mono); font-size: .85rem; white-space: pre-wrap; word-break: break-word; }
+  @media (max-width: 420px) { .meta-list { grid-template-columns: 1fr; } .meta-list dd { margin-bottom: 6px; } }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="decoder.html">Rejection decoder</a>
+      <a href="checklist.html">Launch checklist</a>
+      <a href="order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="order.html">Get help</a> &rsaquo; Sample audit report</p>
+
+  <div class="sample-banner" role="note">
+    <p><strong>Sample, fictional app.</strong> "Dayward" does not exist. This report shows the format and depth of the $49 pre-submission audit. The findings are typical of apps built with AI builders and wrapped for iOS, but every detail below is made up for illustration.</p>
+  </div>
+
+  <h1>Pre-submission audit: Dayward (habit tracker)</h1>
+  <p class="lede">What you receive by email, in this layout: a verdict, the findings in the order we suggest fixing them, and a short list of App Store Connect items to finish before you press Submit.</p>
+
+  <div class="card">
+    <dl class="meta-list">
+      <dt>App</dt><dd>Dayward, a daily habit tracker with streaks, reminders, progress photos and a yearly Pro subscription (fictional)</dd>
+      <dt>Built with</dt><dd>Lovable web app, wrapped for iOS with Capacitor by the owner from a tutorial</dd>
+      <dt>What we reviewed</dt><dd>Published web app, project code export, TestFlight build 1.0 (3), draft App Store listing and screenshots</dd>
+      <dt>Tested on</dt><dd>iOS Simulator (largest current iPhone and 13-inch iPad) and one physical iPhone via TestFlight</dd>
+      <dt>Guidelines as of</dt><dd>App Review Guidelines text published at developer.apple.com, September 2026</dd>
+      <dt>Report date</dt><dd>2026-09-28 (sample)</dd>
+    </dl>
+  </div>
+
+  <h2>Verdict</h2>
+  <div class="note">
+    <p><strong>Not ready to submit yet.</strong> We found 2 blockers, 4 high-risk items and 2 medium-risk items. The blockers would stop the build before or during review. The high-risk items match common rejection reasons for this type of app, and in our reading each would likely lead to a rejection on its own. All eight are fixable in the current project without rebuilding the app.</p>
+    <p>Our estimate, an assumption based on similar projects: about 1 to 2 working days for someone comfortable with Xcode and the Lovable project, most of it in findings 3, 4 and 6. Apple decides; fixing everything here reduces known risks but cannot promise approval.</p>
+  </div>
+
+  <h3>Severity scale</h3>
+  <ul class="plain">
+    <li><span class="sev blocker">Blocker</span> Stops the upload, crashes during review, or is required before Apple will review.</li>
+    <li><span class="sev high">High</span> A common, specific rejection reason that we expect a reviewer to hit.</li>
+    <li><span class="sev medium">Medium</span> A plausible rejection reason, or a listing problem usually fixed without a new build.</li>
+    <li><span class="sev">Low</span> Polish. Not a likely rejection reason. (None in this report.)</li>
+  </ul>
+
+  <h2>Findings at a glance</h2>
+  <div class="card table-wrap">
+    <table class="findings">
+      <thead><tr><th>#</th><th>Finding</th><th>Guideline</th><th>Severity</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><a href="#f1">Tapping "Add progress photo" crashes the app</a></td><td>2.1, 5.1.1(ii)</td><td><span class="sev blocker">Blocker</span></td></tr>
+        <tr><td>2</td><td><a href="#f2">No privacy manifest; outdated plugins</a></td><td>ITMS-91053, 5.1.2</td><td><span class="sev blocker">Blocker</span></td></tr>
+        <tr><td>3</td><td><a href="#f3">App loads the live website instead of bundled files</a></td><td>2.5.2, 4.2</td><td><span class="sev high">High</span></td></tr>
+        <tr><td>4</td><td><a href="#f4">Subscription screen missing terms links and Restore</a></td><td>3.1.2</td><td><span class="sev high">High</span></td></tr>
+        <tr><td>5</td><td><a href="#f5">Google sign-in without an equivalent option</a></td><td>4.8</td><td><span class="sev high">High</span></td></tr>
+        <tr><td>6</td><td><a href="#f6">No way to delete an account in the app</a></td><td>5.1.1(v)</td><td><span class="sev high">High</span></td></tr>
+        <tr><td>7</td><td><a href="#f7">Screenshots from the website; Android mentioned</a></td><td>2.3.3, 2.3.10</td><td><span class="sev medium">Medium</span></td></tr>
+        <tr><td>8</td><td><a href="#f8">Support URL needs a login; template privacy policy</a></td><td>1.5, 5.1.1(i)</td><td><span class="sev medium">Medium</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Findings in detail</h2>
+
+  <article class="card finding" id="f1">
+    <div class="head"><span class="sev blocker">Blocker</span> <span class="tag">Guideline 2.1, 5.1.1(ii)</span></div>
+    <h3>1. Tapping "Add progress photo" crashes the app</h3>
+    <p><strong>Evidence.</strong> On the physical iPhone, TestFlight build 1.0 (3) closes immediately when you tap Add progress photo on a habit. <code>@capacitor/camera</code> is installed, but <code>ios/App/App/Info.plist</code> has no camera or photo library keys:</p>
+    <pre>Info.plist, keys present:  CFBundleDisplayName, UILaunchStoryboardName, ...
+Missing:  NSCameraUsageDescription
+          NSPhotoLibraryUsageDescription
+          NSPhotoLibraryAddUsageDescription</pre>
+    <p>iOS terminates an app that requests camera access without a purpose string. A reviewer who tries the photo feature sees a crash, which is a 2.1 rejection, and the missing text is a 5.1.1(ii) issue on its own.</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Add the three keys to <code>Info.plist</code> with specific text, for example camera: "Take a progress photo to attach to today's check-in." Photo library: "Choose an existing photo to attach to a check-in."</li>
+      <li>Request access only when the user taps Add progress photo (the plugin does this by default once the keys exist).</li>
+      <li>Test "Don't Allow": the app should show a message pointing to Settings and keep working.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-5-1-1-data-collection-purpose-strings.html">5.1.1 data collection and purpose strings</a></p>
+  </article>
+
+  <article class="card finding" id="f2">
+    <div class="head"><span class="sev blocker">Blocker</span> <span class="tag">ITMS-91053, Guideline 5.1.2</span></div>
+    <h3>2. No privacy manifest; outdated plugins</h3>
+    <p><strong>Evidence.</strong> There is no <code>PrivacyInfo.xcprivacy</code> in the App target. <code>package.json</code> pins Capacitor 5.0 and <code>@capacitor/preferences</code> 5.0, which predate bundled privacy manifests. The upload email for build 3, which the owner forwarded, lists ITMS-91053 for the user defaults and file timestamp API categories.</p>
+    <p>An analytics snippet copied from the web app sends a device identifier to a third-party analytics service, while the draft App Privacy answers say "Data Not Collected".</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Update Capacitor and all plugins to current versions, then <code>npx cap sync ios</code>.</li>
+      <li>Add a privacy manifest to the App target, declaring the remaining API categories with reason codes that match what the code does.</li>
+      <li>Remove the web analytics snippet from the iOS build, or declare what it collects in the manifest and in App Privacy. It does not appear to track across other companies' apps, so App Tracking Transparency should not be needed; confirm with the vendor's documentation.</li>
+      <li>Upload a new build and confirm the ITMS-91053 email does not come back.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-5-1-2-privacy-manifest-itms-91053.html">5.1.2 / ITMS-91053 privacy manifest</a></p>
+  </article>
+
+  <article class="card finding" id="f3">
+    <div class="head"><span class="sev high">High</span> <span class="tag">Guideline 2.5.2, 4.2</span></div>
+    <h3>3. App loads the live website instead of bundled files</h3>
+    <p><strong>Evidence.</strong></p>
+    <pre>// capacitor.config.ts
+server: { url: 'https://dayward-app.example', cleartext: false }</pre>
+    <p>Every screen comes from the live site. With the phone in Airplane Mode the app shows a blank white screen. The web header with a hamburger menu and a "Get the app" banner are still visible on iOS, and the Blog link opens the marketing site inside the app.</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Remove <code>server.url</code>, run the production build and <code>npx cap sync</code> so the app loads its own files.</li>
+      <li>Replace the web header with a bottom tab bar (Today, Habits, Progress, Settings) on iOS.</li>
+      <li>Add an offline state that shows today's habits from local storage and queues check-ins.</li>
+      <li>Hide the app banner, cookie banner and Blog link on iOS.</li>
+      <li>Keep one or two native features the reviewer can see: the existing local reminder notifications already count, and the progress photo from finding 1 is another.</li>
+    </ol>
+    <p class="muted">Guides: <a href="guideline/guideline-2-5-2-software-requirements.html">2.5.2 software requirements</a>, <a href="guideline/guideline-4-2-minimum-functionality.html">4.2 minimum functionality</a></p>
+  </article>
+
+  <article class="card finding" id="f4">
+    <div class="head"><span class="sev high">High</span> <span class="tag">Guideline 3.1.2</span></div>
+    <h3>4. Subscription screen missing terms links and Restore</h3>
+    <p><strong>Evidence.</strong> The Pro paywall (shown after the third habit) uses RevenueCat with a yearly product. On screen, from largest to smallest text: "Just $0.77 a week", "Start 7-day free trial", and in small grey text "$39.99/year after trial". There is no Terms of Use link, no Privacy Policy link, and no Restore Purchases button on the paywall or in Settings. The draft description does not mention Terms of Use.</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Make "$39.99 per year" the most prominent price. Keep the weekly figure smaller, if at all.</li>
+      <li>Under the button: "Free for 7 days, then $39.99 per year. Cancel any time in Settings." Read the price from RevenueCat so it matches each storefront.</li>
+      <li>Add Terms of Use and Privacy Policy links on the paywall, opening pages on your own domain.</li>
+      <li>Add Restore Purchases to the paywall and to Settings &gt; Plan, calling RevenueCat's restore and showing the result.</li>
+      <li>Add a Terms of Use link to the description, or use Apple's standard EULA.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-3-1-2-subscriptions.html">3.1.2 subscriptions</a></p>
+  </article>
+
+  <article class="card finding" id="f5">
+    <div class="head"><span class="sev high">High</span> <span class="tag">Guideline 4.8</span></div>
+    <h3>5. Google sign-in without an equivalent option</h3>
+    <p><strong>Evidence.</strong> The sign-in screen offers "Continue with Google" and an email magic link. Google sign-in sets up the user's main account, so 4.8 applies. Apple has rejected apps with this exact combination, because the email option does not let users hide their email address.</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Add Sign in with Apple through your auth provider (Supabase in this project supports it) and show it with equal prominence.</li>
+      <li>Enable the Sign in with Apple capability for the App ID and in Xcode.</li>
+      <li>Test with "Hide My Email" so the account works with the relay address.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-4-8-login-services.html">4.8 login services</a></p>
+  </article>
+
+  <article class="card finding" id="f6">
+    <div class="head"><span class="sev high">High</span> <span class="tag">Guideline 5.1.1(v)</span></div>
+    <h3>6. No way to delete an account in the app</h3>
+    <p><strong>Evidence.</strong> Settings has Log out and a "Contact us to close your account" line. There is no delete option in the app. The backend has no function that deletes a user's habits, check-ins and photos.</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Add Settings &gt; Account &gt; Delete account, with one confirmation step.</li>
+      <li>Add a server-side function that deletes the user, their rows and their stored photos. Do not call admin keys from the app itself.</li>
+      <li>Tell users with an active subscription that deleting the account does not cancel billing, and link to Apple's subscription settings.</li>
+      <li>If Sign in with Apple is added (finding 5), revoke the Apple token on deletion.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-5-1-1-v-account-deletion.html">5.1.1(v) account deletion</a></p>
+  </article>
+
+  <article class="card finding" id="f7">
+    <div class="head"><span class="sev medium">Medium</span> <span class="tag">Guideline 2.3.3, 2.3.10</span></div>
+    <h3>7. Screenshots from the website; Android mentioned</h3>
+    <p><strong>Evidence.</strong> All five iPhone screenshots are desktop captures of the web app placed in phone frames; the first shows the sign-in screen. The build supports iPad, and the iPad screenshots are the iPhone set stretched. The draft description ends with "Also on Android and the web." The name field reads "Dayward - Habit Tracker, Goals &amp; Planner Free".</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Capture new screenshots from the build (after findings 1 to 4), starting with the Today screen and a streak.</li>
+      <li>Either make the iPad layout work and capture it at the 13-inch size, or turn off iPad support in this build.</li>
+      <li>Remove the Android and web line from the description.</li>
+      <li>Rename to "Dayward" with the subtitle "Daily habits and streaks", and drop "Free" from the name.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-2-3-3-2-3-7-screenshots-metadata.html">2.3.3 / 2.3.7 screenshots, name and keywords</a></p>
+  </article>
+
+  <article class="card finding" id="f8">
+    <div class="head"><span class="sev medium">Medium</span> <span class="tag">Guideline 1.5, 5.1.1(i)</span></div>
+    <h3>8. Support URL needs a login; template privacy policy</h3>
+    <p><strong>Evidence.</strong> The draft Support URL is the app's in-app Contact page, which redirects to sign-in when opened in a private browser window. The privacy policy page still says "Your Company Inc." and lists location data, which the app does not collect, while leaving out photos, which it does.</p>
+    <p><strong>Fix.</strong></p>
+    <ol class="steps">
+      <li>Publish a public support page with a support email address and a short FAQ (reset, cancel subscription, delete account).</li>
+      <li>Rewrite the privacy policy to match what the app collects: email, habits and check-ins, progress photos, purchase status. Include how to delete an account.</li>
+      <li>Open both links on a phone on mobile data before saving them in App Store Connect.</li>
+    </ol>
+    <p class="muted">Guide: <a href="guideline/guideline-1-5-developer-information.html">1.5 developer information</a></p>
+  </article>
+
+  <h2>Before you submit</h2>
+  <div class="card">
+    <p>Items in App Store Connect that are not rejection findings, but that commonly delay a first review. Tick them once the fixes above are in a new build.</p>
+    <ul class="plain">
+      <li>App Review Information: a demo account with a few habits and a streak already filled in, plus notes saying where Pro, reminders and progress photos are.</li>
+      <li>Because sign-in uses a magic link, give the reviewer a password login or a code that works without email access.</li>
+      <li>The yearly subscription is attached to version 1.0, with display name, description and review screenshot.</li>
+      <li>The Paid Apps agreement is active, with tax and banking complete (the account owner does this).</li>
+      <li>App Privacy answers match the privacy manifest and the rewritten policy.</li>
+      <li>Age rating questionnaire answered for the current version.</li>
+      <li>Export compliance: the app uses only standard HTTPS, so <code>ITSAppUsesNonExemptEncryption</code> can likely be set to NO. Confirm for your own setup.</li>
+      <li>Version and build number increased for the new upload.</li>
+      <li>Fresh install tested on a physical iPhone: sign up, create a habit, check in, add a photo, buy and restore Pro in sandbox, delete the account.</li>
+    </ul>
+  </div>
+
+  <h2>What this audit does not cover</h2>
+  <div class="card">
+    <ul class="plain">
+      <li><strong>Approval.</strong> Apple decides. This report reduces known risks; it cannot promise an outcome or a review time.</li>
+      <li><strong>Making the changes.</strong> The $49 audit is a written report. If you want us to do the work, the <a href="order.html?tier=ios#order">iOS launch</a> includes it.</li>
+      <li><strong>Security review</strong> of your code, database rules or API keys, beyond noting anything obvious we see while testing.</li>
+      <li><strong>Legal review.</strong> We point out where the privacy policy and terms do not match the app. We do not write or approve legal documents.</li>
+      <li><strong>Google Play and Android.</strong></li>
+      <li><strong>Performance, load and full accessibility testing</strong> across devices.</li>
+      <li><strong>App Store search ranking</strong> or keyword strategy beyond what 2.3.7 requires.</li>
+      <li><strong>Guidelines outside the common rejection reasons</strong> for this kind of app, unless we notice them during testing.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Get this report for your app</h2>
+    <p>Send your app link and we reply in writing with what we need and when you will have the report. The audit is $49, paid after that written confirmation.</p>
+    <div class="row">
+      <a class="btn" href="order.html?tier=audit#order">Order a $49 audit</a>
+      <a class="btn secondary" href="checklist.html">Try the free launch checklist</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 4.0, 4.1 and 5.6 Rejection: Design Quality, Copycat Apps and Developer Conduct (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 4.0 Design, 4.1 Copycats or 5.6 Developer Code of Conduct? What each means for AI-built apps that reuse templates, brands or web layouts, and how to fix it.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-5-6-4-0-design-copycats.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 4.0, 4.1 and 5.6 Rejection: Design Quality, Copycat Apps and Developer Conduct (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 4.0 Design, 4.1 Copycats or 5.6 Developer Code of Conduct? What each means for AI-built apps that reuse templates, brands or web layouts, and how to fix it.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-5-6-4-0-design-copycats.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does a Guideline 4.0 Design rejection usually mean?", "acceptedAnswer": {"@type": "Answer", "text": "Something on screen is hard to use on the device: cropped content, text too small, a layout that does not fit iPad, or sign-in that leaves the app for Safari. The rejection usually includes a screenshot; fix that screen and check the others for the same issue."}}, {"@type": "Question", "name": "Can my app look like a popular app?", "acceptedAnswer": {"@type": "Answer", "text": "Using common patterns such as a tab bar is fine. Copying another app's name, icon, colors and layout closely enough to be confused with it is a 4.1 problem. Make the branding your own."}}, {"@type": "Question", "name": "Can I ask users for a 5-star rating?", "acceptedAnswer": {"@type": "Answer", "text": "Use Apple's system rating prompt. Offering rewards for ratings, or showing the App Store rating request only to users who said they are happy, goes against 5.6.1."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 5.6 / 4.0</p>
+  <h1>Guidelines 4.0 and 5.6: design, copycats and developer conduct</h1>
+  <p class="lede">These rejections are less about a missing feature and more about how the app looks and who it appears to come from. 4.0 is a design quality finding, 4.1 is about imitating another app or brand, and 5.6 is Apple's code of conduct for developers.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Paraphrased:</p>
+<ul class="plain">
+<li><strong>4.0 Design:</strong> parts of the interface are hard to use on the device. Common examples: content cropped or cut off, text too small to read, layouts that do not fit iPad, or a sign-in that sends the user out to Safari to finish.</li>
+<li><strong>4.1 Copycats:</strong> the app's name, icon, look or content imitates a popular app or brand, or suggests a link with a company that it does not have.</li>
+<li><strong>5.6 Developer Code of Conduct:</strong> Apple expects honest dealings. The sub-parts cover manipulating ratings and reviews (5.6.1), accurate developer identity (5.6.2), fraud in discovery such as fake installs (5.6.3), and apps with sustained quality problems or complaints (5.6.4).</li>
+</ul>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>AI builders make a polished first version quickly, and some of that polish is borrowed:</p>
+<ul class="plain">
+<li>The prompt asked for "an app like [famous app]", and the result copied its colors, layout and even its name pattern.</li>
+<li>The icon is a generated image that closely resembles a well-known logo.</li>
+<li>The desktop web layout is squeezed onto a phone, so buttons sit under the notch or the home indicator, and text is cut off.</li>
+<li>The app shows a "Rate us 5 stars to unlock" prompt, or a custom rating dialog that sends only happy users to the App Store (5.6.1).</li>
+<li>The seller name on the developer account does not match the business or brand named in the app (5.6.2).</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Read which number Apple cited.</strong> The fixes for 4.0, 4.1 and 5.6 are different; fix only what was named.</li>
+<li><strong>For 4.0, test every screen on a small and a large iPhone</strong> (and iPad, if supported). Respect the safe areas (<code>env(safe-area-inset-*)</code> in CSS), set a readable base font size, and keep sign-in inside the app.</li>
+<li><strong>For 4.1, make the app clearly your own:</strong> your own name, icon, colors and wording. Remove other companies' names and logos unless you have written permission, and say so in review notes if you do.</li>
+<li><strong>For 5.6.1, use the system rating prompt</strong> (<code>SKStoreReviewController</code>, or a Capacitor plugin for it). Do not reward, gate or filter ratings.</li>
+<li><strong>For 5.6.2, make identities match.</strong> The seller name, the support page and the company named in the app should agree. If you build for a client, the client's own developer account is usually the right place to publish.</li>
+<li><strong>For 5.6.4, look at the reviews and crash reports.</strong> Fix the problems users describe before submitting again.</li>
+<li><strong>Upload a new build</strong> if anything inside the app changed, and update screenshots to match.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Be specific about what was redesigned or removed.</p>
+  <pre class="reply">Hello,
+
+Thank you. Regarding Guideline [4.0 / 4.1 / 5.6.x]: in build [version], we [e.g. &quot;fixed cropped content on (screens) and moved sign-in inside the app&quot; / &quot;replaced the app icon and color scheme and removed references to (brand)&quot; / &quot;replaced our custom rating dialog with the system rating prompt&quot;]. Updated screenshots are attached to this version.
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a> if Apple thinks the app duplicates your own or someone else's existing app.</li>
+<li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a> if the name or keywords borrow another brand.</li>
+<li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a> if the design finding is really about the app feeling like a website.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>What does a Guideline 4.0 Design rejection usually mean?</h3>
+<p>Something on screen is hard to use on the device: cropped content, text too small, a layout that does not fit iPad, or sign-in that leaves the app for Safari. The rejection usually includes a screenshot; fix that screen and check the others for the same issue.</p>
+<h3>Can my app look like a popular app?</h3>
+<p>Using common patterns such as a tab bar is fine. Copying another app&#x27;s name, icon, colors and layout closely enough to be confused with it is a 4.1 problem. Make the branding your own.</p>
+<h3>Can I ask users for a 5-star rating?</h3>
+<p>Use Apple&#x27;s system rating prompt. Offering rewards for ratings, or showing the App Store rating request only to users who said they are happy, goes against 5.6.1.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-1-5-developer-information.html">Guideline 1.5: Developer information and support URL</a></li>
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a></li>
+      <li><a href="guideline-2-5-2-software-requirements.html">Guideline 2.5.2: Software requirements / downloaded code</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-3-1-2-subscriptions.html">Guideline 3.1.2: Subscriptions, restore and terms links</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 5.1.1 Rejection: Data Collection, Permissions and Purpose Strings like NSCameraUsageDescription (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 5.1.1 for data collection or a permission request? How to write purpose strings (NSCameraUsageDescription, location, photos, microphone), fix ITMS-90683, and reply.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-5-1-1-data-collection-purpose-strings.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 5.1.1 Rejection: Data Collection, Permissions and Purpose Strings like NSCameraUsageDescription (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 5.1.1 for data collection or a permission request? How to write purpose strings (NSCameraUsageDescription, location, photos, microphone), fix ITMS-90683, and reply.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-5-1-1-data-collection-purpose-strings.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What should NSCameraUsageDescription say?", "acceptedAnswer": {"@type": "Answer", "text": "One specific sentence about what your app does with the camera, ideally with an example, such as \"Take a photo of a receipt to attach it to an expense.\" Generic text like \"This app needs the camera\" is a common reason for a 5.1.1 rejection."}}, {"@type": "Question", "name": "What does ITMS-90683 Missing purpose string mean?", "acceptedAnswer": {"@type": "Answer", "text": "Your build, or a framework in it, references a protected API such as the camera or location, and the matching usage description key is missing from Info.plist. Add the key with a real explanation, or remove the plugin that references the API."}}, {"@type": "Question", "name": "Can I show my own screen before the system permission prompt?", "acceptedAnswer": {"@type": "Answer", "text": "A short explanation is generally fine, as long as the user can continue without granting access and the button does not pressure them. A screen with only an \"Allow\" or \"Continue\" option that leads straight to the prompt is a common 5.1.1(iv) finding."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 5.1.1 data collection</p>
+  <h1>Guideline 5.1.1 rejection: data collection and purpose strings</h1>
+  <p class="lede">Guideline 5.1.1 covers what data an app collects and how it asks. For wrapped apps the usual trigger is a permission prompt: a camera, photo, location or microphone request whose explanation text is missing, vague, or shown before the user has any reason to allow it.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Apple cites a sub-part. Paraphrased:</p>
+<ul class="plain">
+<li><strong>5.1.1(i):</strong> the app has no privacy policy link, or the policy does not say what is collected, how, and how to ask for deletion.</li>
+<li><strong>5.1.1(ii):</strong> the purpose string does not clearly explain why the app needs the permission. Apple wants a specific use, often with an example, not "This app needs camera access."</li>
+<li><strong>5.1.1(iii):</strong> the app asks for data it does not need for its core function.</li>
+<li><strong>5.1.1(iv):</strong> the app pushes people to allow access, for example a custom screen with only a "Continue" button before the system prompt, or it stops working when the user says no.</li>
+<li><strong>5.1.1(v) registration:</strong> the app requires an account for features that do not need one. Account deletion is covered on its own page.</li>
+</ul>
+<p>A related upload email, <strong>ITMS-90683 Missing purpose string in Info.plist</strong>, means a framework in the build references a protected API and the matching key is missing. Without the key, the app can crash when that API is used.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>Capacitor plugins add native abilities, but they do not write your permission texts:</p>
+<ul class="plain">
+<li>The Camera plugin is installed for a profile photo, and <code>NSCameraUsageDescription</code>, <code>NSPhotoLibraryUsageDescription</code> and <code>NSPhotoLibraryAddUsageDescription</code> are missing or copied from a tutorial ("We need your camera").</li>
+<li>A location plugin is added "in case", so the app asks for location at launch with no location feature visible.</li>
+<li>Notification, tracking and camera prompts all appear on first launch, before sign-up.</li>
+<li>The web app's sign-up wall is kept, so browsing public content requires an account.</li>
+<li>The privacy policy is a generated template that names data the app does not collect and misses what it does.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>List every permission the build can request.</strong> Check <code>Info.plist</code> for every <code>NS...UsageDescription</code> key and your installed plugins. Remove plugins you do not use.</li>
+<li><strong>Write one specific sentence per key</strong>, saying what the app does with it, ideally with an example. For instance, camera: "Take a photo of a receipt to attach it to an expense." Location when in use: "Show gyms near you on the map." Microphone: "Record voice notes that are saved to your journal."</li>
+<li><strong>Ask at the moment of use,</strong> not at launch. The camera prompt should appear when the user taps "Add photo".</li>
+<li><strong>Handle "Don't Allow".</strong> The feature should explain how to enable access in Settings, and the rest of the app should keep working.</li>
+<li><strong>Remove forced pre-prompts.</strong> A short explanation screen is fine if it lets the user continue without granting access.</li>
+<li><strong>Open non-account features without login</strong> where possible, or explain why an account is needed.</li>
+<li><strong>Match the privacy policy and App Privacy answers</strong> to what the app actually collects, then upload a new build.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Quote the new purpose string so the reviewer does not have to find it.</p>
+  <pre class="reply">Hello,
+
+Thank you. In build [version], we updated the [camera / location / photo library] purpose string to: &quot;[exact text]&quot;. The permission is now requested only when the user [action, e.g. &quot;taps Add photo on the entry screen&quot;], and the app continues to work if the user declines. [We removed the (location) permission, which the app did not need.]
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a> for the account deletion part of the same guideline.</li>
+<li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a> because data you collect is also declared in the privacy manifest.</li>
+<li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a> because camera and photo features are often added to address 4.2, and then need purpose strings.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>What should NSCameraUsageDescription say?</h3>
+<p>One specific sentence about what your app does with the camera, ideally with an example, such as &quot;Take a photo of a receipt to attach it to an expense.&quot; Generic text like &quot;This app needs the camera&quot; is a common reason for a 5.1.1 rejection.</p>
+<h3>What does ITMS-90683 Missing purpose string mean?</h3>
+<p>Your build, or a framework in it, references a protected API such as the camera or location, and the matching usage description key is missing from Info.plist. Add the key with a real explanation, or remove the plugin that references the API.</p>
+<h3>Can I show my own screen before the system permission prompt?</h3>
+<p>A short explanation is generally fine, as long as the user can continue without granting access and the button does not pressure them. A screen with only an &quot;Allow&quot; or &quot;Continue&quot; option that leads straight to the prompt is a common 5.1.1(iv) finding.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-1-5-developer-information.html">Guideline 1.5: Developer information and support URL</a></li>
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a></li>
+      <li><a href="guideline-2-5-2-software-requirements.html">Guideline 2.5.2: Software requirements / downloaded code</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-3-1-2-subscriptions.html">Guideline 3.1.2: Subscriptions, restore and terms links</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

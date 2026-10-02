@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 2.3.3 and 2.3.7 Rejection: Screenshots, App Name and Keywords That Don&#x27;t Match the App (AI-built apps)</title>
+<meta name="description" content="Rejected under 2.3.3 for screenshots or 2.3.7 for the name, subtitle or keywords? How to capture real screenshots at the required sizes, rename cleanly, and reply without a new build.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-2-3-3-2-3-7-screenshots-metadata.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 2.3.3 and 2.3.7 Rejection: Screenshots, App Name and Keywords That Don&#x27;t Match the App (AI-built apps)">
+<meta property="og:description" content="Rejected under 2.3.3 for screenshots or 2.3.7 for the name, subtitle or keywords? How to capture real screenshots at the required sizes, rename cleanly, and reply without a new build.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-2-3-3-2-3-7-screenshots-metadata.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I make App Store screenshots from my website?", "acceptedAnswer": {"@type": "Answer", "text": "Screenshots should show the iOS app in use, as it looks on the device size you upload them for. Desktop captures of a website placed in a phone frame are a common 2.3.3 finding. Capture from the Simulator or a device running the submitted build."}}, {"@type": "Question", "name": "Do I need iPad screenshots?", "acceptedAnswer": {"@type": "Answer", "text": "If the build supports iPad, App Store Connect asks for an iPad set, and it should show the app as it runs on iPad. Stretched iPhone captures are a common rejection. If the app is not designed for iPad, removing iPad support in the build is an option."}}, {"@type": "Question", "name": "Can I put competitor names in my keywords?", "acceptedAnswer": {"@type": "Answer", "text": "No. Guideline 2.3.7 does not allow trademarked terms, other apps' names or unrelated phrases in the name, subtitle or keywords. Use words that describe what your app does."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 2.3.3 / 2.3.7</p>
+  <h1>Guideline 2.3.3 and 2.3.7: screenshots, name and keywords</h1>
+  <p class="lede">These two sub-guidelines are the most specific parts of 2.3. 2.3.3 is about screenshots that do not show the app in use. 2.3.7 is about a name, subtitle or keyword list that does not describe the app honestly. Both are usually fixed in App Store Connect, without a new build.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Paraphrased:</p>
+<ul class="plain">
+<li><strong>2.3.3:</strong> screenshots should show the app in use, not just title art, a login page or a splash screen. Each device size should show the app as it looks on that device.</li>
+<li><strong>2.3.4:</strong> app previews (videos) should use screen captures of the app itself.</li>
+<li><strong>2.3.7:</strong> choose a distinct name and keywords that describe the app. Do not pack the name, subtitle or keywords with trademarked terms, other apps' names, pricing words or unrelated phrases.</li>
+<li><strong>2.3.8:</strong> the icon, screenshots and previews should suit all audiences and match the app.</li>
+</ul>
+<p>The general 2.3 page covers the other sub-guidelines, such as descriptions that promise missing features and references to other platforms.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>The listing for an AI-built app is usually made in the same afternoon as the landing page:</p>
+<ul class="plain">
+<li>Screenshots are desktop captures of the website, placed inside phone frames, so the layout on the screenshot is not what the phone shows.</li>
+<li>iPad screenshots are iPhone screenshots stretched to the iPad size, with black bars or a blown-up layout.</li>
+<li>The first screenshot is the sign-in screen, because that is what opens first.</li>
+<li>The screenshots show features from the web plan that the iOS build hides, such as a pricing page.</li>
+<li>The name is "Habit Tracker - Goals, Planner &amp; Journal Free" and the keyword field repeats the name plus competitor names.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Capture from the real build.</strong> Run the app in the iOS Simulator on the largest iPhone and, if the app supports iPad, the largest iPad. Use <code>xcrun simctl io booted screenshot shot.png</code> or File &gt; Save Screen. Use realistic sample data, not "Lorem ipsum" or "Test user".</li>
+<li><strong>Use the required sizes.</strong> At the time of writing, App Store Connect asks for a 6.9-inch iPhone set (for example 1320 x 2868 portrait) and, for iPad apps, a 13-inch set (for example 2064 x 2752). Check the current screenshot specifications before uploading.</li>
+<li><strong>Order for the reviewer and the buyer.</strong> Screenshot one shows the main thing the app does. Skip the login screen.</li>
+<li><strong>Captions are fine; the app must be the main content.</strong> A short caption above a real screen works. A slide that is mostly artwork does not.</li>
+<li><strong>Rewrite the name:</strong> a short distinct name, 30 characters maximum, with descriptive words moved to the 30-character subtitle.</li>
+<li><strong>Rewrite the keywords</strong> (100 characters, comma-separated): no repeats of words already in the name, no competitor or brand names, no "free", "best" or "#1".</li>
+<li><strong>If the app does not support iPad well,</strong> consider turning iPad support off in the build rather than submitting weak iPad screenshots. That change needs a new build.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. If you only edited the listing, say so, so the reviewer knows not to wait for a build.</p>
+  <pre class="reply">Hello,
+
+Thank you. Regarding Guideline 2.3.[3 / 7]: we replaced the [iPhone / iPad] screenshots with captures of the app in use, showing [main screens, e.g. &quot;the daily check-in and progress screens&quot;]. [We changed the app name to &quot;[name]&quot;, moved descriptive terms to the subtitle, and removed third-party names from the keywords.]
+
+No binary change was needed; the listing has been updated.
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a> for the rest of 2.3, including descriptions and other-platform references.</li>
+<li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a> if the name or icon is close to another company's app.</li>
+<li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a> if new screenshots make it obvious the app is a website in a frame.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>Can I make App Store screenshots from my website?</h3>
+<p>Screenshots should show the iOS app in use, as it looks on the device size you upload them for. Desktop captures of a website placed in a phone frame are a common 2.3.3 finding. Capture from the Simulator or a device running the submitted build.</p>
+<h3>Do I need iPad screenshots?</h3>
+<p>If the build supports iPad, App Store Connect asks for an iPad set, and it should show the app as it runs on iPad. Stretched iPhone captures are a common rejection. If the app is not designed for iPad, removing iPad support in the build is an option.</p>
+<h3>Can I put competitor names in my keywords?</h3>
+<p>No. Guideline 2.3.7 does not allow trademarked terms, other apps&#x27; names or unrelated phrases in the name, subtitle or keywords. Use words that describe what your app does.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-1-5-developer-information.html">Guideline 1.5: Developer information and support URL</a></li>
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a></li>
+      <li><a href="guideline-2-5-2-software-requirements.html">Guideline 2.5.2: Software requirements / downloaded code</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-3-1-2-subscriptions.html">Guideline 3.1.2: Subscriptions, restore and terms links</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Store Guideline 1.5 Rejection: Developer Information and Support URL, What It Means and How to Fix It (AI-built apps)</title>
+<meta name="description" content="Rejected under Guideline 1.5 Developer Information because the Support URL does not work or has no contact details? What to put on a support page and how to reply without a new build.">
+<link rel="canonical" href="https://neumax-labs.github.io/guideline/guideline-1-5-developer-information.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Store Guideline 1.5 Rejection: Developer Information and Support URL, What It Means and How to Fix It (AI-built apps)">
+<meta property="og:description" content="Rejected under Guideline 1.5 Developer Information because the Support URL does not work or has no contact details? What to put on a support page and how to reply without a new build.">
+<meta property="og:url" content="https://neumax-labs.github.io/guideline/guideline-1-5-developer-information.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What should a Support URL page contain?", "acceptedAnswer": {"@type": "Answer", "text": "A public page, reachable without logging in, with a working way to contact you (an email address or a contact form) and the app's name. A short FAQ helps. It does not need to be long."}}, {"@type": "Question", "name": "Can I use my builder's preview URL as the Support URL?", "acceptedAnswer": {"@type": "Answer", "text": "It is risky. Preview and staging domains can sleep, require login or change when you republish, and the reviewer may see an error. Use a page on your own domain that stays up."}}, {"@type": "Question", "name": "Do I need a new build to fix a Guideline 1.5 rejection?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not. Update the Support URL in App Store Connect and reply in the Resolution Center. A new build is only needed if the app itself had broken contact links you want to fix."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="../decoder.html">Rejection decoder</a>
+      <a href="../checklist.html">Launch checklist</a>
+      <a href="../order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="../decoder.html">Rejection decoder</a> &rsaquo; Guideline 1.5</p>
+  <h1>Guideline 1.5 rejection: developer information and support URL</h1>
+  <p class="lede">Guideline 1.5 asks that people can reach you. In practice it is about the Support URL in App Store Connect: the reviewer opened it and found an error, a login wall, or a page with no way to contact anyone.</p>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This page is our own reading of the App Review Guidelines as of September 2026, not Apple's wording, and following it does not guarantee approval. The current text at developer.apple.com is the authority.</p>
+  </div>
+
+  <h2>What Apple's message says</h2>
+<p>Paraphrased: the Support URL does not lead to a page with support information, or the app and its support page do not give users a way to contact the developer with questions and support issues. Apple sometimes mentions that the link returned an error or pointed to a placeholder.</p>
+<p>The same message can arrive as 2.1 when the Support or Privacy Policy URL is unreachable, and the Privacy Policy URL has its own rules under 5.1.1(i). Fix all three links together.</p>
+
+  <h2>Why AI-built apps hit it</h2>
+<p>AI builders give you a working site in minutes, but the links in App Store Connect often point at the wrong one:</p>
+<ul class="plain">
+<li>The Support URL is the builder's preview or staging domain, which sleeps, asks for a login, or gets replaced when the project is republished.</li>
+<li>The Support URL is the app's home page, which has a sign-up button but no contact details.</li>
+<li>The contact form is part of the app and needs an account, so the reviewer cannot see it.</li>
+<li>The page shows a template name or "Your Company" left over from the starter project.</li>
+<li>Support and Privacy URLs were typed with a typo and never opened after saving.</li>
+</ul>
+
+  <h2>How to fix it, step by step</h2>
+  <div class="card">
+<ol class="steps">
+<li><strong>Make one public support page</strong> on your own domain, reachable without logging in. A single static page is enough.</li>
+<li><strong>Put real contact details on it:</strong> a support email address that you read, or a contact form that does not need an account. Add the app's name so the reviewer knows it is the right page.</li>
+<li><strong>Add a short FAQ</strong> for the questions users will ask first: how to reset a password, how to cancel a subscription, how to delete an account.</li>
+<li><strong>Check the other links:</strong> the Privacy Policy URL opens a real policy, and the Marketing URL (optional) is not a broken page.</li>
+<li><strong>Open every link from a phone on mobile data,</strong> in a private window, before saving. A link that only works on your Wi-Fi or while logged in to the builder is still broken.</li>
+<li><strong>Add a contact path inside the app too,</strong> such as Settings &gt; Help with the same email. This is not always required, but reviewers look for it.</li>
+<li><strong>Update the URLs in App Store Connect</strong> (App Information for Privacy Policy, the version page for Support URL) and reply. Usually no new build is needed.</li>
+</ol>
+  </div>
+
+  <h2>What to reply in the Resolution Center</h2>
+  <p class="muted">Fill in the brackets and delete anything you did not do. Give the new URL in the reply so the reviewer can open it directly.</p>
+  <pre class="reply">Hello,
+
+Thank you. We updated the Support URL to [https://yourdomain.com/support]. The page is public and lists our support email, [address], along with answers to common questions. [We also updated the Privacy Policy URL to (link).]
+
+No binary change was needed; the listing has been updated.
+
+Best regards,
+[Your name]</pre>
+
+  <h2>Related guidelines</h2>
+<ul class="plain">
+<li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a> if the reviewer also could not sign in or reach part of the app.</li>
+<li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a> for the privacy policy requirements under 5.1.1(i).</li>
+<li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a> if the support page or description still mentions the web version's features.</li>
+</ul>
+
+  <h2>Questions</h2>
+<h3>What should a Support URL page contain?</h3>
+<p>A public page, reachable without logging in, with a working way to contact you (an email address or a contact form) and the app&#x27;s name. A short FAQ helps. It does not need to be long.</p>
+<h3>Can I use my builder&#x27;s preview URL as the Support URL?</h3>
+<p>It is risky. Preview and staging domains can sleep, require login or change when you republish, and the reviewer may see an error. Use a page on your own domain that stays up.</p>
+<h3>Do I need a new build to fix a Guideline 1.5 rejection?</h3>
+<p>Usually not. Update the Support URL in App Store Connect and reply in the Resolution Center. A new build is only needed if the app itself had broken contact links you want to fix.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Stuck on this rejection?</h2>
+    <p>Paste the full message into the free <a href="../decoder.html">rejection decoder</a> to see every cited guideline explained, with a reply draft. It runs in your browser and nothing is uploaded.</p>
+    <p>Or order a rejection fix, $99: we read the full message, find the cause, fix it in your project, upload a new build and draft the reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="../order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="../decoder.html">Decode my rejection (free)</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline-1-5-developer-information.html">Guideline 1.5: Developer information and support URL</a></li>
+      <li><a href="guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline-2-3-accurate-metadata.html">Guideline 2.3: Accurate metadata</a></li>
+      <li><a href="guideline-2-3-3-2-3-7-screenshots-metadata.html">Guideline 2.3.3 / 2.3.7: Screenshots, name and keywords</a></li>
+      <li><a href="guideline-2-5-2-software-requirements.html">Guideline 2.5.2: Software requirements / downloaded code</a></li>
+      <li><a href="guideline-3-1-1-in-app-purchase.html">Guideline 3.1.1: In-app purchase</a></li>
+      <li><a href="guideline-3-1-2-subscriptions.html">Guideline 3.1.2: Subscriptions, restore and terms links</a></li>
+      <li><a href="guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="guideline-4-3-spam.html">Guideline 4.3: Spam</a></li>
+      <li><a href="guideline-4-8-login-services.html">Guideline 4.8: Login services / Sign in with Apple</a></li>
+      <li><a href="guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline-5-1-1-v-account-deletion.html">Guideline 5.1.1(v): Account deletion</a></li>
+      <li><a href="guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline-5-6-4-0-design-copycats.html">Guideline 5.6 / 4.0: Design, copycats and developer conduct</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>
