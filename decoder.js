@@ -28,7 +28,7 @@
     },
     {
       key: '2.1-info', standalone: true, title: 'Information Needed (demo account or explanation)',
-      phrases: [/information needed/i, /demo account/i, /(unable|not able) to (sign|log) ?in/i, /provide (us with )?(a |the )?(user ?name|credentials|login)/i],
+      phrases: [/information needed|need (more|additional) information/i, /demo account/i, /(unable|not able) to (sign|log) ?in/i, /provide (us with )?(a |the )?(user ?name|credentials|login)/i],
       suppresses: ['2.1'],
       meaning: 'This is often a question, not a verdict. The reviewer could not get far enough into the app to judge it, usually because it needs a login and no working test account was provided, or because a feature needs hardware, a location or an invite code.',
       causes: [
@@ -242,7 +242,7 @@
     },
     {
       key: '5.1.1', title: 'Data Collection and Storage (privacy, permissions, login)',
-      phrases: [/data collection and storage/i, /purpose string|usage description|NS\w+UsageDescription/i, /(requires?|require users to) (register|log ?in|sign ?in).{0,80}(not|non)[- ]account/i],
+      phrases: [/data collection and storage/i, /purpose string|usage description|NS\w+UsageDescription/i, /requir(e|es|ing) (users )?(to )?(register|log ?in|sign ?in|create an account).{0,80}(not|non)[- ]account/i],
       meaning: 'A privacy problem: a permission request that does not clearly say why, a login required for features that do not need an account, or personal data asked for without a reason.',
       causes: ['Camera or location permission text like "This app needs camera access" with no reason.', 'Forcing sign-up before users can browse anything.', 'Asking for phone number or birthday without explaining why.'],
       fix: [
@@ -333,47 +333,92 @@
     });
   }
 
-  function decode(text) {
-    var out = { cited: [], matches: [], device: null, unknown: [] };
-    if (!text || !text.trim()) return out;
-    var found = {}; var order = [];
+  // Device lines: "Device type: iPad Air (5th generation)", "Review device: iPad Air 11-inch (M3)",
+  // or the older "reviewed on iPad running iPadOS 17.4.1". A bare "iPhone" elsewhere
+  // (for example "6.5-inch iPhone screenshots") is not a review device.
+  var DEVICE_LINE_RE = /(?:review device|device type|devices? reviewed)\s*:\s*([^\n]{3,80})/i;
+  var DEVICE_ON_RE = /\b(?:reviewed|tested|running|launched|used)\b[^\n.]{0,40}?\bon (?:an? )?((?:iPad|iPhone)(?:[^\n,;.]|\.\d){0,50})/i;
+  var DEVICE_RUNNING_RE = /\b((?:iPad|iPhone)(?:[^\n,;.]|\.\d){0,30}?\brunning i(?:Pad)?OS \d+(?:\.\d+)*)/i;
+
+  function findDevice(text) {
+    var dm = DEVICE_LINE_RE.exec(text) || DEVICE_ON_RE.exec(text) || DEVICE_RUNNING_RE.exec(text);
+    return dm ? dm[1].trim().replace(/[.\s]+$/, '') : null;
+  }
+
+  // Match rules inside one piece of text. cites = rule keys/labels Apple cited in this
+  // piece (empty = no numbers, match by wording alone). Returns {key: {rule, how, pos, cited}}.
+  function matchSegment(seg, offset, cites, standaloneOnly) {
+    var local = {}; var order = [];
     function add(rule, how, pos, isCite) {
       if (!rule) return;
-      if (!found[rule.key]) { found[rule.key] = { rule: rule, how: [], pos: pos, cited: false }; order.push(rule.key); }
-      var f = found[rule.key];
+      if (!local[rule.key]) { local[rule.key] = { rule: rule, how: [], pos: pos, cited: false }; order.push(rule.key); }
+      var f = local[rule.key];
       if (f.how.indexOf(how) < 0) f.how.push(how);
       if (isCite) f.cited = true;
       if (pos < f.pos) f.pos = pos;
     }
-    var m, one;
+    cites.forEach(function (c) { add(c.rule, 'Apple cited Guideline ' + c.label, offset, true); });
+    var labels = cites.map(function (c) { return c.label; });
+    RULES.forEach(function (r) {
+      // With guideline numbers present, wording only narrows a cited number down
+      // (e.g. 4.2 -> 4.2.6). Rules flagged standalone have specific enough wording.
+      if (standaloneOnly && !r.standalone) return;
+      if (labels.length && !r.standalone && !isRefinementOf(r.key, labels)) return;
+      for (var i = 0; i < r.phrases.length; i++) {
+        var pm = r.phrases[i].exec(seg);
+        if (pm) { add(r, 'wording "' + pm[0].slice(0, 60) + '"', offset + pm.index, false); break; }
+      }
+    });
+    // A more specific rule replaces its parent (4.2.6 replaces 4.2) within the same
+    // finding. Another finding that cites the parent on its own keeps it.
+    var suppressed = {};
+    order.forEach(function (k) { (local[k].rule.suppresses || []).forEach(function (s) { suppressed[s] = true; }); });
+    var kept = [];
+    order.forEach(function (k) { if (!suppressed[k]) kept.push(local[k]); });
+    return kept;
+  }
+
+  function decode(text) {
+    var out = { cited: [], matches: [], device: null, unknown: [] };
+    if (!text || !text.trim()) return out;
+    // Split the message into findings: each "Guideline ..." heading starts a new one.
+    var heads = []; var m, one;
     NUM_RE.lastIndex = 0;
     while ((m = NUM_RE.exec(text))) {
+      var cites = [];
       ONE_RE.lastIndex = 0;
       while ((one = ONE_RE.exec(m[1]))) {
         var label = one[1] + (one[2] ? '(' + one[2].toLowerCase() + ')' : '');
         if (out.cited.indexOf(label) < 0) out.cited.push(label);
         var r = lookup(one[1], one[2]);
-        if (r) add(r, 'Apple cited Guideline ' + label, m.index, true);
+        if (r) cites.push({ rule: r, label: label });
         else if (out.unknown.indexOf(label) < 0) out.unknown.push(label);
       }
+      heads.push({ start: m.index, cites: cites });
     }
-    var haveCites = out.cited.length > 0;
-    RULES.forEach(function (r) {
-      // With guideline numbers present, wording only narrows a cited number down
-      // (e.g. 4.2 -> 4.2.6). Rules flagged standalone have specific enough wording.
-      if (haveCites && !r.standalone && !isRefinementOf(r.key, out.cited)) return;
-      for (var i = 0; i < r.phrases.length; i++) {
-        var pm = r.phrases[i].exec(text);
-        if (pm) { add(r, 'wording "' + pm[0].slice(0, 60) + '"', pm.index, false); break; }
-      }
-    });
-    // A more specific rule replaces its parent (4.2.6 replaces 4.2), cited or not.
-    var suppressed = {};
-    order.forEach(function (k) { (found[k].rule.suppresses || []).forEach(function (s) { suppressed[s] = true; }); });
-    order.forEach(function (k) { if (!suppressed[k]) out.matches.push(found[k]); });
+    var found = {}; var order = [];
+    function merge(list) {
+      list.forEach(function (f) {
+        var g = found[f.rule.key];
+        if (!g) { found[f.rule.key] = { rule: f.rule, how: f.how.slice(), pos: f.pos, cited: f.cited }; order.push(f.rule.key); return; }
+        f.how.forEach(function (h) { if (g.how.indexOf(h) < 0) g.how.push(h); });
+        if (f.cited) g.cited = true;
+        if (f.pos < g.pos) g.pos = f.pos;
+      });
+    }
+    if (!heads.length) {
+      merge(matchSegment(text, 0, [], false));
+    } else {
+      if (heads[0].start > 0) merge(matchSegment(text.slice(0, heads[0].start), 0, [], true));
+      heads.forEach(function (h, i) {
+        var end = i + 1 < heads.length ? heads[i + 1].start : text.length;
+        // A heading whose numbers are all uncovered still gets standalone checks only.
+        merge(matchSegment(text.slice(h.start, end), h.start, h.cites, h.cites.length === 0));
+      });
+    }
+    order.forEach(function (k) { out.matches.push(found[k]); });
     out.matches.sort(function (a, b) { return a.pos - b.pos; });
-    var dm = /(?:review )?device(?:s)?(?: type)?\s*:\s*([^\n]{3,80})/i.exec(text) || /\b(iPad[^\n,.;]{0,40}|iPhone[^\n,.;]{0,40})\b/.exec(text);
-    if (dm) out.device = dm[1].trim();
+    out.device = findDevice(text);
     return out;
   }
 

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample $99 App Store Rejection Fix (Fictional App) | Ship Desk</title>
+<meta name="description" content="A full sample of the $99 rejection fix for an AI-built app: the rejection decoded line by line, the fix list, the Resolution Center reply draft and the resubmission checklist. The app is fictional.">
+<link rel="canonical" href="https://neumax-labs.github.io/sample-rejection-fix.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sample $99 App Store Rejection Fix (Fictional App)">
+<meta property="og:description" content="A full sample of the $99 rejection fix for an AI-built app: the rejection decoded line by line, the fix list, the Resolution Center reply draft and the resubmission checklist. The app is fictional.">
+<meta property="og:url" content="https://neumax-labs.github.io/sample-rejection-fix.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<style>
+  .sev { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+  .sev.blocker { color: var(--danger); border-color: var(--danger); background: transparent; }
+  .sev.high { color: var(--warn); background: var(--warn-soft); border-color: transparent; }
+  .sev.medium { color: var(--accent); background: var(--accent-soft); border-color: transparent; }
+  .sample-banner { border: 2px dashed var(--warn); background: var(--warn-soft); color: var(--text); border-radius: var(--radius); padding: 12px 16px; margin: 0 0 18px; }
+  .sample-banner p { margin: 0; }
+  .meta-list { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
+  .meta-list dt { font-weight: 600; color: var(--muted); }
+  .meta-list dd { margin: 0; }
+  .table-wrap { overflow-x: auto; }
+  table.findings { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  table.findings th, table.findings td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.findings th { color: var(--muted); font-weight: 600; }
+  .finding h3 { margin-top: 0; }
+  .finding .head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .finding pre { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font-family: var(--mono); font-size: .85rem; white-space: pre-wrap; word-break: break-word; }
+  @media (max-width: 420px) { .meta-list { grid-template-columns: 1fr; } .meta-list dd { margin-bottom: 6px; } }
+  .decoded { border-left: 3px solid var(--accent); padding-left: 12px; }
+  .quote { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: .92rem; white-space: pre-wrap; word-break: break-word; font-family: var(--mono); }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="decoder.html">Rejection decoder</a>
+      <a href="checklist.html">Launch checklist</a>
+      <a href="order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="order.html">Get help</a> &rsaquo; Sample rejection fix</p>
+
+  <div class="sample-banner" role="note">
+    <p><strong>Sample, fictional app.</strong> "Brightjar" is an example app and does not exist. This page shows the format and depth of what you receive with the $99 rejection fix. The rejection reasons are typical for apps built with AI builders and wrapped for iOS, but the rejection text, names, times and code below are made up for illustration.</p>
+  </div>
+
+  <h1>Rejection fix: Brightjar (example app, meal planner)</h1>
+  <p class="lede">What you receive by email, in this layout: the rejection decoded in plain words, what we changed for each point, a reply to the reviewer for you to approve, and the checklist we run before resubmitting.</p>
+
+  <div class="card">
+    <dl class="meta-list">
+      <dt>App</dt><dd>Brightjar, a weekly meal planner with shopping lists, recipe photos and sign-in with email (fictional example)</dd>
+      <dt>Built with</dt><dd>Bolt web app, wrapped for iOS with Capacitor by the owner</dd>
+      <dt>Rejected build</dt><dd>Version 1.0, build 4. Review device in Apple's message: iPad Air (5th generation)</dd>
+      <dt>Guidelines cited</dt><dd>2.1 App Completeness, 5.1.1(ii) Data Collection, 5.1.1(v) Account Deletion</dd>
+      <dt>Access received</dt><dd>Tuesday 10:00 ET (example). Deadline: Friday 10:00 ET, 72 hours later</dd>
+      <dt>Delivered</dt><dd>Thursday 16:00 ET (example), new build 1.0 (5) processed in TestFlight</dd>
+    </dl>
+  </div>
+
+  <h2>Summary</h2>
+  <div class="note">
+    <p><strong>Three cited problems, all fixed in build 5. One extra item fixed before it causes the next rejection.</strong> The app is not waiting on you for code. Before we resubmit, we need two things from you: your written OK on the reply below, and a confirmation that the new demo account works for you too.</p>
+    <p>Apple decides. These changes address every point in the rejection, but nobody can promise approval or a review time. If Apple rejects this build again, the next fix-and-resubmit round is included (up to two more rounds at no extra cost).</p>
+  </div>
+
+  <h2>1. The rejection, decoded</h2>
+  <p>Apple's message mixes boilerplate with the part that matters. Here is the rejection as received (shortened), then what each part means.</p>
+
+  <article class="card finding" id="r1">
+    <div class="head"><span class="sev blocker">Cited</span> <span class="tag">Guideline 2.1, App Completeness</span></div>
+    <h3>"We were unable to sign in with the demo account"</h3>
+    <div class="quote">We were unable to sign in with the demo account credentials you provided. An error message was displayed: "Invalid login." Additionally, the app displayed a blank screen after we tapped "Continue" on iPad Air (5th generation) running iPadOS.</div>
+    <div class="decoded">
+      <p><strong>What it means.</strong> Two separate problems. The reviewer could not get past sign-in, so they did not see the rest of the app. Then, on iPad, the screen after sign-in stayed white.</p>
+      <p><strong>What we found.</strong> The demo account in App Review Information had been created on a test database that the iOS build no longer uses, so the password was correct but the account did not exist. The blank screen came from the web layout: on iPad widths, the plan screen waited for a sidebar that only loads on desktop, and never rendered.</p>
+    </div>
+    <p class="muted">Guide: <a href="guideline/guideline-2-1-app-completeness.html">2.1 app completeness</a></p>
+  </article>
+
+  <article class="card finding" id="r2">
+    <div class="head"><span class="sev blocker">Cited</span> <span class="tag">Guideline 5.1.1(ii), Data Collection</span></div>
+    <h3>"The purpose string does not sufficiently explain the use"</h3>
+    <div class="quote">Your app's code references one or more APIs that access sensitive user data, and the app's permission request does not clearly and completely describe how the app will use the data. NSCameraUsageDescription: "This app needs camera access."</div>
+    <div class="decoded">
+      <p><strong>What it means.</strong> The text in the camera permission popup is too generic. Apple wants a specific reason tied to a feature the user can see.</p>
+      <p><strong>What we found.</strong> The camera is used only to add a photo to a recipe. The photo library key was also generic, and would likely have been the next point.</p>
+    </div>
+    <p class="muted">Guide: <a href="guideline/guideline-5-1-1-data-collection-purpose-strings.html">5.1.1 data collection and purpose strings</a></p>
+  </article>
+
+  <article class="card finding" id="r3">
+    <div class="head"><span class="sev blocker">Cited</span> <span class="tag">Guideline 5.1.1(v), Account Deletion</span></div>
+    <h3>"The app supports account creation but does not include an option to initiate account deletion"</h3>
+    <div class="quote">Apps that support account creation must also offer account deletion within the app. Emailing support or visiting a website is not sufficient if the process is not fully in the app.</div>
+    <div class="decoded">
+      <p><strong>What it means.</strong> Users who can sign up in the app must also be able to delete their account in the app. A "contact us" line does not count.</p>
+      <p><strong>What we found.</strong> Settings had Log out only. The backend had no function to delete a user's plans, shopping lists and photos.</p>
+    </div>
+    <p class="muted">Guide: <a href="guideline/guideline-5-1-1-v-account-deletion.html">5.1.1(v) account deletion</a></p>
+  </article>
+
+  <h2>2. What we changed</h2>
+  <p>One change set per point, in your project, each with the guideline in the commit message. Items marked "also fixed" were not in Apple's message; our readiness checker flagged them, and they are listed separately so you can see what was asked and what was extra.</p>
+  <div class="card table-wrap">
+    <table class="findings">
+      <thead><tr><th>#</th><th>Change</th><th>For</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>New demo account created on the production database, with a sample week of meals and a shopping list already filled in. Tested from a fresh install.</td><td>2.1</td><td><span class="sev medium">Done</span></td></tr>
+        <tr><td>2</td><td>Plan screen renders without the desktop sidebar on iPad widths; added a simple two-column layout. Tested in the simulator on iPad Air and 13-inch iPad, portrait and landscape.</td><td>2.1</td><td><span class="sev medium">Done</span></td></tr>
+        <tr><td>3</td><td>Camera text: "Take a photo of a dish to add it to the recipe." Photo library text: "Choose a photo from your library to add it to a recipe." Permission asked only when the user taps Add photo.</td><td>5.1.1(ii)</td><td><span class="sev medium">Done</span></td></tr>
+        <tr><td>4</td><td>Settings &gt; Account &gt; Delete account, with one confirmation. A server-side function deletes the user, their plans, lists and stored photos. No admin key in the app.</td><td>5.1.1(v)</td><td><span class="sev medium">Done</span></td></tr>
+        <tr><td>5</td><td>Also fixed: added a privacy manifest and updated Capacitor plugins, which the upload email had warned about (ITMS-91053).</td><td>5.1.2</td><td><span class="sev">Also fixed</span></td></tr>
+        <tr><td>6</td><td>Build number raised to 5, archived, uploaded to TestFlight. Processing finished; available to you as a tester.</td><td>&ndash;</td><td><span class="sev medium">Done</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What we did not change</h3>
+  <ul class="plain">
+    <li>Prices, subscriptions, agreements, tax or banking. None were part of this rejection, and we do not touch them.</li>
+    <li>Your app's features, design or text beyond what the points above required.</li>
+    <li>Your users' data. The delete function was tested only on test accounts we created.</li>
+  </ul>
+
+  <h2>3. Reply to the reviewer (draft for your approval)</h2>
+  <div class="card finding">
+    <p>We post this in Resolution Center when we resubmit, only after your written OK. It is short and factual on purpose: it says what changed and where to look, and makes no promises or arguments.</p>
+    <pre>Hello,
+
+Thank you for the review. We have addressed each point in build 1.0 (5):
+
+Guideline 2.1
+- The demo account in App Review Information has been replaced and
+  tested on a fresh install. It includes a sample meal plan.
+- The blank screen after "Continue" on iPad has been fixed. We tested
+  on iPad Air (5th generation) and 13-inch iPad, in portrait and landscape.
+
+Guideline 5.1.1(ii)
+- The camera and photo library permission texts now explain the
+  specific use: adding a photo of a dish to a recipe.
+
+Guideline 5.1.1(v)
+- Users can delete their account in the app: Settings > Account >
+  Delete account. This removes the account and its meal plans,
+  shopping lists and photos.
+
+Please let us know if anything else is needed.
+
+Best regards</pre>
+    <p class="muted">You can change anything in this text. If you would rather post it yourself, copy it as is.</p>
+  </div>
+
+  <h2>4. Resubmission checklist</h2>
+  <div class="card">
+    <p>We run this list before we press Submit. Items marked "you" need the account owner.</p>
+    <ul class="plain">
+      <li>Your written OK on the reply above (you).</li>
+      <li>You have signed in with the new demo account from TestFlight on your own phone (you).</li>
+      <li>Build 1.0 (5) is selected for version 1.0; build 4 is no longer attached.</li>
+      <li>App Review Information: new demo email and password saved, notes say where to find recipe photos and Delete account.</li>
+      <li>Fresh install tested on a physical iPhone: sign in, create a plan, add a photo (allow and deny), delete the test account.</li>
+      <li>iPad tested in the simulator in both orientations, because the review device was an iPad.</li>
+      <li>App Privacy answers match the privacy manifest: email, meal plans, photos.</li>
+      <li>Privacy policy explains how to delete an account, and opens without signing in.</li>
+      <li>Reply posted in Resolution Center, then Submit for Review.</li>
+    </ul>
+  </div>
+
+  <h2>What this service does not cover</h2>
+  <div class="card">
+    <ul class="plain">
+      <li><strong>Approval.</strong> Apple decides. We fix what the rejection cites and what our checker flags; we cannot promise an outcome or a review time.</li>
+      <li><strong>Rejections about the business model or the developer account</strong>, such as legal requirements for regulated apps or a terminated account. We say so before you pay.</li>
+      <li><strong>New native features</strong> beyond what the cited guidelines need.</li>
+      <li><strong>Google Play and Android.</strong></li>
+      <li><strong>Security and legal review</strong> beyond noting anything obvious we see.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Get this for your rejected app</h2>
+    <p>Paste your rejection message and we reply in writing with what we will fix and by when. The fix is $99, done within 72 hours of getting access or a full refund, paid after that written confirmation.</p>
+    <div class="row">
+      <a class="btn" href="order.html?tier=fix#order">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="decoder.html">Decode your rejection for free</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Also from us: <a href="https://rowanhalebooks.gumroad.com/l/ekria">Shipping with Claude Code</a> (ebook) and the <a href="https://rowanhalebooks.gumroad.com/l/claude-code-harness-pack">Claude Code harness pack</a>.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>

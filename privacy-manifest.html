@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrivacyInfo.xcprivacy Generator — fix ITMS-91053 Missing API declaration</title>
+<meta name="description" content="Paste Apple's ITMS-91053 Missing API declaration email and build a valid PrivacyInfo.xcprivacy for Capacitor, Flutter or React Native. Reason codes explained in plain English. Free, runs in your browser.">
+<link rel="canonical" href="https://neumax-labs.github.io/privacy-manifest.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PrivacyInfo.xcprivacy Generator — fix ITMS-91053 Missing API declaration">
+<meta property="og:description" content="Paste Apple's ITMS-91053 email and build a valid PrivacyInfo.xcprivacy for Capacitor, Flutter or React Native. Reason codes explained in plain English. Free, runs in your browser.">
+<meta property="og:url" content="https://neumax-labs.github.io/privacy-manifest.html">
+<meta property="og:site_name" content="Ship Desk">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "PrivacyInfo.xcprivacy Generator", "description": "Build a privacy manifest (PrivacyInfo.xcprivacy) from an ITMS-91053 Missing API declaration email, with required reason codes explained.", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://neumax-labs.github.io/privacy-manifest.html"}</script>
+<link rel="stylesheet" href="style.css">
+<style>
+  .reason { padding: 10px 0; border-top: 1px solid var(--border); }
+  .reason:first-of-type { border-top: 0; }
+  .reason .why { font-size: .88rem; color: var(--muted); margin: 4px 0 0 30px; }
+  .reason.sdk-only .check { opacity: .6; }
+  .cat[data-on="false"] .reasons { display: none; }
+  .cat .cat-head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; justify-content: space-between; }
+  .cat .apis { font-size: .85rem; color: var(--muted); margin: 6px 0 0 30px; }
+  .reasons { margin-top: 10px; }
+  .plugin-hint { font-size: .88rem; margin: 8px 0 0 30px; }
+  pre.plist { tab-size: 2; -moz-tab-size: 2; white-space: pre; overflow-x: auto; max-height: 460px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-family: var(--mono); font-size: .8rem; margin: 0 0 10px; }
+  .dt-row { padding: 10px 0; border-top: 1px solid var(--border); }
+  .dt-row:first-of-type { border-top: 0; }
+  .dt-opts { margin: 8px 0 0 30px; display: none; }
+  .dt-row[data-on="true"] .dt-opts { display: block; }
+  .dt-opts .check { font-size: .9rem; margin-bottom: 4px; }
+  .purposes { display: grid; grid-template-columns: 1fr; gap: 2px 12px; margin-top: 6px; }
+  @media (min-width: 560px) { .purposes { grid-template-columns: 1fr 1fr; } }
+  #found:empty { display: none; }
+  .warn-list { color: var(--warn); font-weight: 600; }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="decoder.html">Ship Desk</a>
+    <nav class="site" aria-label="Main">
+      <a href="decoder.html">Rejection decoder</a>
+      <a href="checklist.html">Launch checklist</a>
+      <a href="order.html">Get help</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="muted"><a href="guideline/guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053</a> &rsaquo; Generator</p>
+  <h1>PrivacyInfo.xcprivacy generator</h1>
+  <p class="lede">Got an "ITMS-91053: Missing API declaration" email after uploading a Capacitor, Flutter or React Native build? Paste it here. You pick a reason for each API category the email names, and get a privacy manifest file to add to your Xcode project.</p>
+  <p class="muted">Free. It runs entirely in your browser; the email text and your choices are not uploaded or stored.</p>
+
+  <form id="parse-form" class="card no-print">
+    <div class="field">
+      <label for="email">ITMS-91053 email text <span class="hint">Copy the whole email from App Store Connect, including every line that starts with "ITMS-91053". Or skip this and tick categories by hand below.</span></label>
+      <textarea id="email" spellcheck="false" placeholder="ITMS-91053: Missing API declaration - Your app's code in the &quot;App&quot; file references one or more APIs that require reasons, including the following API categories: NSPrivacyAccessedAPICategoryUserDefaults..."></textarea>
+    </div>
+    <div class="row">
+      <button class="btn" type="submit">Find categories</button>
+      <button class="btn secondary" type="button" id="sample">Try a sample</button>
+      <button class="btn secondary" type="button" id="clear">Clear all</button>
+    </div>
+    <p class="status" id="parse-status" role="status" aria-live="polite"></p>
+  </form>
+
+  <section id="found" aria-live="polite"></section>
+
+  <h2>1. API categories and reasons</h2>
+  <p>For each category, tick the reason that describes what the code actually does. Codes and their wording come from Apple's "Describing use of required reason API" documentation (checked 2026-09-29). Where a common plugin is involved we say which code usually fits and why; confirm it against what your app does.</p>
+  <div id="cats"></div>
+
+  <h2>2. Tracking</h2>
+  <div class="card">
+    <label class="check"><input type="checkbox" id="tracking"> <span><strong>This app tracks users</strong> (NSPrivacyTracking)<span class="hint">Tracking means linking data from your app with data from other companies' apps or websites for ads or ad measurement, or sharing it with data brokers. Most apps built with Lovable, Bolt, v0 or Replit that only use their own backend and first-party analytics do not track. If this is true, the app must also show the App Tracking Transparency prompt.</span></span></label>
+    <div class="field" id="domains-field" hidden style="margin:12px 0 0 30px">
+      <label for="domains">Tracking domains <span class="hint">One per line, for example ads.example.com. Apple blocks connections to these until the user allows tracking.</span></label>
+      <textarea id="domains" spellcheck="false" style="min-height:90px"></textarea>
+    </div>
+  </div>
+
+  <h2>3. Collected data (optional)</h2>
+  <p class="muted">Declares what your own app code collects and sends off the device. It should match your App Privacy answers in App Store Connect. SDKs declare their own collection in their own manifests. Leave everything unticked to output an empty list.</p>
+  <div class="card" id="datatypes"></div>
+
+  <h2>4. Your file</h2>
+  <div class="card">
+    <p id="out-warn" class="warn-list" hidden></p>
+    <label for="plist" class="visually-hidden">Generated PrivacyInfo.xcprivacy</label>
+    <pre class="plist" id="plist" tabindex="0"></pre>
+    <div class="row">
+      <button class="btn" type="button" id="download">Download PrivacyInfo.xcprivacy</button>
+      <button class="btn secondary" type="button" id="copy">Copy</button>
+    </div>
+  </div>
+
+  <h2>Where to put it</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><strong>Check for an existing file first.</strong> Search the <code>ios</code> folder for <code>PrivacyInfo.xcprivacy</code>. Newer project templates (recent React Native versions, for example) already include one. If yours exists, merge these entries into it instead of adding a second file to the same target.</li>
+      <li><strong>Save it next to the app's Info.plist:</strong>
+        <ul class="plain">
+          <li>Capacitor: <code>ios/App/App/PrivacyInfo.xcprivacy</code></li>
+          <li>Flutter: <code>ios/Runner/PrivacyInfo.xcprivacy</code></li>
+          <li>React Native: <code>ios/&lt;YourProjectName&gt;/PrivacyInfo.xcprivacy</code></li>
+        </ul>
+      </li>
+      <li><strong>Add it to the target in Xcode.</strong> Copying the file into the folder is not enough. Open the workspace (<code>ios/App/App.xcworkspace</code> for Capacitor, <code>ios/Runner.xcworkspace</code> for Flutter), drag the file into the App or Runner group in the project navigator, and in the dialog tick your app target under "Add to targets".</li>
+      <li><strong>Confirm it is bundled:</strong> select the target, open Build Phases &gt; Copy Bundle Resources, and check <code>PrivacyInfo.xcprivacy</code> is listed.</li>
+      <li><strong>Update the plugins the email named</strong> (see the notes above), raise the build number, archive and upload. If the email does not come back for that build, the declaration was accepted.</li>
+    </ol>
+  </div>
+
+  <h2>Honest notes</h2>
+  <div class="note">
+    <p><strong>Apple decides.</strong> This tool writes the file in the format Apple documents; it cannot know what your code does. Declared reasons must match real behaviour, and choosing a reason that does not fit is itself a review problem. Following this does not guarantee acceptance.</p>
+  </div>
+  <ul class="plain">
+    <li><strong>Third-party SDKs need their own manifests.</strong> Apple's documentation says an SDK cannot rely on the app's manifest to cover its API use. If the email names a file inside <code>Frameworks/</code>, the fix is usually to update that plugin or SDK to a version that ships its own manifest.</li>
+    <li><strong>If the email names your app binary</strong> (<code>App</code>, <code>Runner</code> or your app's name), the code is linked into your app, which includes plugins linked statically. Your app's manifest is the right place for those.</li>
+    <li><strong>Capacitor versions.</strong> Capacitor's own documentation says to update to at least 4.8.2, 5.7.4, 6.0.0 or 7.0.0 (by major version); 3 and older are not supported.</li>
+    <li><strong>Only the categories on this page need reasons.</strong> Apple also documents SDK-only reasons (marked below); an app must not use those in its own manifest.</li>
+    <li><strong>Nothing is uploaded.</strong> The email text, your choices and the file stay in this browser tab.</li>
+  </ul>
+  <p class="muted">Source: Apple Developer Documentation, "Describing use of required reason API" and the NSPrivacyAccessedAPIType reference (developer.apple.com, read 2026-09-29). Capacitor "Privacy Manifest" docs (capacitorjs.com, read 2026-09-29). Apple updates these lists; the current text at developer.apple.com is the authority.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Want someone to handle it?</h2>
+    <p>Rejection fix, $99: we read the full message, find which code and plugins trigger it, fix the project, upload a new build and draft any reply for your approval. Target turnaround 72 hours from access. Apple still makes the final decision, and its review time is separate.</p>
+    <div class="row">
+      <a class="btn" href="order.html?tier=fix#fix">Order a $99 rejection fix</a>
+      <a class="btn secondary" href="decoder.html">Decode a rejection (free)</a>
+    </div>
+  </div>
+
+  <noscript><p class="note">This generator needs JavaScript. Nothing is sent anywhere; it only runs in your browser.</p></noscript>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Guides</strong></p>
+    <ul class="plain">
+      <li><a href="guideline/guideline-5-1-2-privacy-manifest-itms-91053.html">Guideline 5.1.2 / ITMS-91053: Privacy manifest</a></li>
+      <li><a href="guideline/guideline-5-1-1-data-collection-purpose-strings.html">Guideline 5.1.1: Data collection and purpose strings</a></li>
+      <li><a href="guideline/guideline-2-1-app-completeness.html">Guideline 2.1: App completeness and Information Needed</a></li>
+      <li><a href="guideline/guideline-4-2-minimum-functionality.html">Guideline 4.2: Minimum functionality</a></li>
+      <li><a href="checklist.html">Ship-to-App-Store checklist</a></li>
+    </ul>
+    <p>Ship Desk is operated by NEUMAX LLC. Contact in writing: sc@neumaxtech.com.</p>
+    <p>Also from us: <a href="https://rowanhalebooks.gumroad.com/l/ekria">Shipping with Claude Code</a> (ebook) and the <a href="https://rowanhalebooks.gumroad.com/l/claude-code-harness-pack">Claude Code harness pack</a>.</p>
+    <p>Not affiliated with Apple or Google. App Store and TestFlight are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</p>
+  </div>
+</footer>
+<script src="privacy-manifest.js"></script>
+</body>
+</html>
